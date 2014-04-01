@@ -12,7 +12,7 @@ module.exports = function(grunt) {
             },
             green: {
                 host: '127.0.0.1',
-                port: 2223,
+                port: 2200,
                 username: 'root',
                 password: 'mepcRul3Z'
             }
