@@ -1,20 +1,17 @@
 package net.mepc.server;
 
-import java.util.EnumSet;
-
-import javax.servlet.DispatcherType;
-
+import ch.qos.logback.access.jetty.RequestLogImpl;
+import com.google.inject.Inject;
+import com.google.inject.name.Named;
+import com.google.inject.servlet.GuiceFilter;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.handler.HandlerCollection;
 import org.eclipse.jetty.server.handler.RequestLogHandler;
 import org.eclipse.jetty.servlet.FilterHolder;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 
-import ch.qos.logback.access.jetty.RequestLogImpl;
-
-import com.google.inject.Inject;
-import com.google.inject.name.Named;
-import com.google.inject.servlet.GuiceFilter;
+import javax.servlet.DispatcherType;
+import java.util.EnumSet;
 
 public class MepcServer {
 

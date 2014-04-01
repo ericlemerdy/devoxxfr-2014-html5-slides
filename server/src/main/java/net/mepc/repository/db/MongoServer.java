@@ -1,17 +1,16 @@
 package net.mepc.repository.db;
 
-import java.net.UnknownHostException;
-import java.text.MessageFormat;
-
-import org.jongo.Jongo;
-import org.jongo.MongoCollection;
-
 import com.google.inject.Inject;
 import com.mongodb.DB;
 import com.mongodb.DBCollection;
 import com.mongodb.MongoClient;
 import com.mongodb.MongoClientURI;
 import com.mongodb.gridfs.GridFS;
+import org.jongo.Jongo;
+import org.jongo.MongoCollection;
+
+import java.net.UnknownHostException;
+import java.text.MessageFormat;
 
 public class MongoServer {
 

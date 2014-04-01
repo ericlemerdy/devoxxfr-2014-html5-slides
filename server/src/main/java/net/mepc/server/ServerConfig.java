@@ -1,10 +1,10 @@
 package net.mepc.server;
 
-import java.io.File;
-import java.nio.file.FileAlreadyExistsException;
-
 import com.google.inject.Inject;
 import com.google.inject.name.Named;
+
+import java.io.File;
+import java.nio.file.FileAlreadyExistsException;
 
 public class ServerConfig {
 	private final int port;

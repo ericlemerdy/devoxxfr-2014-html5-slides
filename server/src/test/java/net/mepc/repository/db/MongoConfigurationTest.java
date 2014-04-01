@@ -1,11 +1,10 @@
 package net.mepc.repository.db;
 
-import static net.mepc.repository.db.MongoConfiguration.createConfiguration;
-import static org.fest.assertions.api.Assertions.assertThat;
-
+import com.mongodb.MongoClientURI;
 import org.junit.Test;
 
-import com.mongodb.MongoClientURI;
+import static net.mepc.repository.db.MongoConfiguration.createConfiguration;
+import static org.fest.assertions.api.Assertions.assertThat;
 
 public class MongoConfigurationTest {
 	@Test
