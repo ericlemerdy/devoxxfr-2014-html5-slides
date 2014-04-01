@@ -1,0 +1,12 @@
+!SESSION 2014-03-06 07:11:26.249 -----------------------------------------------
+eclipse.buildId=debbuild
+java.version=1.7.0_21
+java.vendor=Oracle Corporation
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=en_US
+Command-line arguments:  -os linux -ws gtk -arch x86_64
+
+!ENTRY org.infinitest.eclipse 1 0 2014-03-06 07:11:45.137
+!MESSAGE Beans loaded: [org.springframework.context.annotation.internalConfigurationAnnotationProcessor, org.springframework.context.annotation.internalAutowiredAnnotationProcessor, org.springframework.context.annotation.internalRequiredAnnotationProcessor, org.springframework.context.annotation.internalCommonAnnotationProcessor, infinitestConfig, org.springframework.context.annotation.ConfigurationClassPostProcessor.importAwareProcessor, coreLifecycleObserver, markerClearingRunnable, infinitestActivationController, slowTestObserver, testResultAggregator, swtEventQueue, failureMediator, slowMarkerRegistry, resourceLookupAdapter, markerPlacer, markerClearingObserver, problemMarkerRegistry, preferenceChangeHandler, resultCollectorBean, eclipseWorkspace, infinitestCoreRegistry, javaProjectSet, workspaceResourceFinder, coreFactory, cleanEventProcessor, saveDetector, classFileChangeProcessor, coreUpdateNotifier, visualStatusPresenter, workspace, sourceContainer]
+
+!ENTRY org.eclipse.osgi 2 1 2014-03-06 07:12:52.887
+!MESSAGE NLS unused message: CacheManager_CannotLoadNonUrlLocation in: org.eclipse.equinox.internal.p2.repository.messages
