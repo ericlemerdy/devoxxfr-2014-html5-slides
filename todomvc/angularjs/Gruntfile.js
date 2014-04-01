@@ -47,4 +47,9 @@ module.exports = function(grunt) {
         'sftp:deploy',
         'sshexec:extract'
     ]);
+
+    grunt.registerTask('default', [
+        'package',
+        'deploy'
+    ]);
 };
