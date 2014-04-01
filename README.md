@@ -1,5 +1,3 @@
-That presentation is a bootstrap for HTML5 slides about Devoxx FR 2014.
+That project is a fork of the [gpaul](http://gpaul.me) HTML5 slides for Devoxx FR 2014.
 
-It includes several Open Source projects like shower (http://shwr.me), webl10n (https://github.com/fabi1cazenave/webL10n) and graphical assets.
-
-See references on last slide.
+See the presentation : [http://ericlemerdy.github.io/devoxxfr-2014-mepc](http://ericlemerdy.github.io/devoxxfr-2014-mepc)
