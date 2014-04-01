@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html lang="fr">
 <head>
-	<title data-l10n-id="main-title">Title</title>
+	<title>Mise en Production Continue - 1 an après</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=792, user-scalable=no">
 	<meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -30,48 +30,8 @@
 </head>
 <body class="list">
 	<header class="caption">
-		<h1 data-l10n-id="main-title"></h1>
+		<h1>Mise en Production Continue - 1 an après</h1>
 	</header>
-    <section class="slide language selection"><div>
-        <style>
-            .slide.language.selection h2, 
-            .slide.language.selection p                     { text-align: center; }
-            .slide.language.selection p a.selected          { color: green; }
-            .slide.language.selection p a.selected:before   { content: "✓"; }
-        </style>
-        <h2>Langue - Language</h2>
-        <p><a href="" class="french">en français</a> - <a href="" class="english">in english</a></p>
-        <script defer>
-            var setLang = function(lng, elToSelect, elToDeselect, e) {
-                if (e) {
-                    e.preventDefault();
-                }
-                document.webL10n.setLanguage(lng);
-		localStorage.lng = lng;
-                elToSelect.classList.add('selected');
-                elToDeselect.classList.remove('selected');
-            };
-            var slide = document.querySelector('.slide.language.selection');
-            var french = slide.querySelector('.french');
-            var english = slide.querySelector('.english');
-            french.addEventListener('click', setLang.bind(this, 'fr', french, english), false);
-            english.addEventListener('click', setLang.bind(this, 'en', english, french), false);
-            var startup = true;
-            window.addEventListener('localized', function() {
-                document.documentElement.lang = document.webL10n.getLanguage();
-                document.documentElement.dir = document.webL10n.getDirection();
-                if (startup) {
-                    startup = false;
-                    var selection = localStorage.lng || ((document.webL10n.getLanguage().indexOf('en') === 0) ? 'en' : 'fr');
-                    if (selection === 'fr') {
-                          setLang('fr', french, english);
-                    } else {
-                          setLang('en', english, french);
-                    }
-                }
-            }, false);
-        </script>
-    </div></section>
     <section class="slide cover" id="Cover"><div>
         <style>
             #Cover .titles       { margin: -105px -120px 0 -120px; }
@@ -88,11 +48,11 @@
             #Cover h5            { background: #53B6BC; height: 50px; margin-top: 5px; color: white; font-size: 24px; padding-left: 10px; }
 		</style>
         <div class="titles">
-            <h2 data-l10n-id="main-title"></h2>
+            <h2>Mise en Production Continue - 1 an après</h2>
             <h3></h3>
             <ul>
-                <li data-l10n-id="author">
-                <li><img src="pictures/twitter.png"><a href="https://twitter.com/your_twitter" rel="me" class="twitter">@your_twitter</a><img src="pictures/user_circle.png"><a href="" rel="me">http://your-website.com</a>
+                <li><img src="pictures/twitter.png"><a href="https://twitter.com/pchaussalet" rel="me" class="twitter">@pchaussalet</a>- in-Tact
+				<li><img src="pictures/twitter.png"><a href="https://twitter.com/ericlemerdy" rel="me" class="twitter">@ericlemerdy</a>- Valtech
             </ul>
             <h4></h4>
             <h5><a class="hashtag" href="https://twitter.com/search?q=%23deboxxbtc">#devoxx</a></h5>
@@ -101,31 +61,31 @@
 	</div></section>
     <section class="slide cover title"><div>
         <div class="color1"></div><div class="color2"></div><div class="color3"></div>
-        <h1 data-l10n-id="example-title"></h1>
+        <h1>Hello-World !</h1>
 		<img src="pictures/cover.jpg" alt="">
         <p class="footer"><a class="hashtag" href="https://twitter.com/search?q=%23deboxxbtc">#devoxx</a><span class="twitter"><img src="pictures/twitter.png"><a href="https://twitter.com/your_twitter" rel="me" class="twitter">@your_twitter</a></span></p>
     </div></section>
     <section class="slide example"><div>
-        <h2 data-l10n-id="example-title"></h2>
+        <h2>Hello World 2 !</h2>
         <div class="prices">
             <ul>
-                <li data-l10n-id="example-1">
-                <li data-l10n-id="example-2">
+                <li><strong>Lorem</strong> ipsum dolor
+                <li>Lorem ipsum dolor
             </ul>
         </div>
     </div></section>
     <section class="slide cover title"><div>
         <div class="color1"></div><div class="color2"></div><div class="color3"></div>
-        <h1 data-l10n-id="assets-title"></h1>
+        <h1>Références des ressources</h1>
 		<img src="pictures/cover.jpg" alt="">
         <p class="footer"><a class="hashtag" href="https://twitter.com/search?q=%23deboxxbtc">#devoxx</a><span class="twitter"><img src="pictures/twitter.png"><a href="https://twitter.com/your_twitter" rel="me" class="twitter">@your_twitter</a></span></p>
     </div></section>
     <section class="slide"><div>
-        <h2 data-l10n-id="assets-title"></h2>
+        <h2>Références des ressources</h2>
         <ul>
-            <li data-l10n-id="assets-icons">
-            <li data-l10n-id="assets-shower">
-            <li data-l10n-id="assets-webl10n">
+            <li>Icônes par <a href="http://piotrkwiatkowski.co.uk">Piotr Kwiatkowski</a>
+			<li><a href="https://github.com/shower/shower/">Shower</a> comme système de présentation
+			<li><a href="https://github.com/fabi1cazenave/webL10n">webl10n</a> comme système de traduction
         </ul>
     </div></section>
     <div class="progress"><div></div></div>
