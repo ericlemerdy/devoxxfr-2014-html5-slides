@@ -12,6 +12,8 @@ import static com.google.common.io.Files.newReader;
 import static com.google.common.io.Resources.getResource;
 import static com.google.inject.name.Names.bindProperties;
 import static java.lang.Boolean.getBoolean;
+import static java.lang.String.format;
+import static java.lang.System.err;
 import static java.lang.System.getenv;
 import static java.nio.charset.Charset.defaultCharset;
 
@@ -23,15 +25,14 @@ public class ConfigModule extends AbstractModule {
 		String configPath = getBoolean("test_mode") ? getResource("mepc.config").getPath()
 				: getenv("MEPC_CONFIG_PATH");
 		File configFile = new File(configPath);
-		Properties properties = new Properties();
 		try {
+			Properties properties = new Properties();
 			properties.load(newReader(configFile, defaultCharset()));
 			bindProperties(binder(), properties);
 		} catch (FileNotFoundException e) {
-			System.err.println("The configuration file " + configFile.getAbsolutePath()
-					+ " can not be found or is not a file.");
+			err.println(format("The configuration file %s can not be found or is not a file.", configFile.getAbsolutePath()));
 		} catch (IOException e) {
-			System.err.println("I/O error during loading configuration from file " + configFile.getAbsolutePath());
+			err.println(format("I/O error during loading configuration from file %s", configFile.getAbsolutePath()));
 		}
 		bind(MepcConfig.class);
 	}
