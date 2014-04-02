@@ -26,6 +26,7 @@
         .slide.title .footer a          { color: white; border: 0; }
         .slide.title .footer .twitter   { float: right; }
         .slide.title .footer .twitter img { display: inline; position: relative; z-index: 1; margin: 0 .2em 0 0; vertical-align: middle; }
+        code                            { font-size: large; }
     </style>
 </head>
 <body class="list">
@@ -104,6 +105,33 @@
         <h1>Étape 1 : déployons</h1>
         <img src="pictures/cover.jpg" alt="">
         <p class="footer"><a class="hashtag" href="https://twitter.com/search?q=%23deboxxbtc">#devoxx</a><span class="twitter"><img src="pictures/twitter.png"><a href="https://twitter.com/your_twitter" rel="me" class="twitter">@your_twitter</a></span></p>
+    </div></section>
+    <section class="slide"><div>
+        <h2>Gentlemen, start your engines</h2>
+        <ul>
+            <li>
+                Construit et taggue une image Docker (un conteneur web ngnix)<br>
+                <blockquote>build_front.sh :</blockquote>
+                <code>cd front</code><br>
+                <code>docker build --rm -t mepc/front .</code>
+            <li>
+                Lance 2 instances : <code>blue</code> et <code>green</code><br>
+                <blockquote>run_front.sh :</blockquote>
+                <code>docker run -d -t -p 2222:22 -p 8080:80 --name blue mepc/front</code><br>
+                <code>docker run -d -t -p 2200:22 -p 8081:80 --name green mepc/front</code>
+        </ul>
+    </div></section>
+    <section class="slide"><div>
+        <h2>Ça marche ?</h2>
+        <div>Non parce qu'on a rien mis dans le serveur</div>
+    </div></section>
+    <section class="slide"><div>
+        <h2>Gentlemen, ... deploy ?!? your engines ?</h2>
+        <div>
+            Dans le front :
+            <code>npm install</code>
+            <code>grunt --config blue</code>
+        </div>
     </div></section>
     <div class="progress"><div></div></div>
     <!-- Custom shower build, see https://github.com/your_twitter/shower/commit/a621cf451f24b74f70233cc91f6d934904dd4ae4 -->
