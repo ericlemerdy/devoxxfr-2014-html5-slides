@@ -5,8 +5,7 @@ RUN apt-get update && \
     DEBIAN_FRONTEND=noninteractive apt-get install -y nginx openssh-sftp-server
 RUN mkdir -p /var/run/sshd && \
     mkdir -p /var/www && \
-    rm -rf /usr/share/nginx/html && \
-    ln -s /var/www /usr/share/nginx/html
+    rm -rf /usr/share/nginx/html
 RUN echo root:mepcRul3Z |chpasswd
 ADD start.sh /root/start.sh
 
