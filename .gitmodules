@@ -1,0 +1,3 @@
+[submodule "docker/jenkins-docker"]
+	path = docker/jenkins-docker
+	url = https://github.com/simonvc/jenkins-docker.git
