@@ -6,7 +6,7 @@
  * - exposes the model to the template and provides event handlers
  */
 angular.module('todomvc')
-	.controller('TodoCtrl', function TodoCtrl($scope, $routeParams, $filter, todoStorage) {
+	.controller('TodoCtrl', function TodoCtrl($scope, $routeParams, $filter, $http, todoStorage) {
 		'use strict';
 
 		var todos = $scope.todos = todoStorage.get();
@@ -81,4 +81,13 @@ angular.module('todomvc')
 				todo.completed = !completed;
 			});
 		};
+
+        $scope.loadVersion = function() {
+            $http.get('package.json')
+                .success(function(data) {
+                    $scope.appVersion = data.version;
+                })
+        };
+
+        $scope.loadVersion();
 	});
