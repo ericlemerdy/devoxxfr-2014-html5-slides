@@ -113,12 +113,11 @@
                 Construit et taggue une image Docker (un conteneur web ngnix)<br>
                 <blockquote>build_front.sh :</blockquote>
                 <code>cd front</code><br>
-                <code>docker build --rm -t mepc/front .</code>
+                <code>docker build --rm -t mepc/front:1 .</code>
             <li>
-                Lance 2 instances : <code>blue</code> et <code>green</code><br>
+                Lance une instances :<br>
                 <blockquote>run_front.sh :</blockquote>
-                <code>docker run -d -t -p 2222:22 -p 8080:80 --name blue mepc/front</code><br>
-                <code>docker run -d -t -p 2200:22 -p 8081:80 --name green mepc/front</code>
+                <code>docker run -d -t -p 2222:22 -p 8080:80 --name front mepc/front</code><br>
         </ul>
     </div></section>
     <section class="slide"><div>
@@ -130,8 +129,21 @@
         <div>
             Dans le front :
             <code>npm install</code>
-            <code>grunt --config blue</code>
+            <code>grunt package deploy</code>
         </div>
+    </div></section>
+    <section class="slide"><div>
+        <h2>Et maintenant, ça marche ?</h2>
+        <div>Apparemment, oui !</div>
+        <img src="pictures/front1.png" style="width: 280px;"/>
+    </div></section>
+    <section class="slide"><div>
+        <h2>Encore, encore !!</h2>
+        <div>
+            Rien de plus simple :
+            <code>grunt package deploy</code>
+        </div>
+        <img src="pictures/tada.gif" style="width: 280px"/>
     </div></section>
     <div class="progress"><div></div></div>
     <!-- Custom shower build, see https://github.com/your_twitter/shower/commit/a621cf451f24b74f70233cc91f6d934904dd4ae4 -->
