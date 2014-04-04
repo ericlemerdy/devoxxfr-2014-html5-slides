@@ -40,7 +40,7 @@ module.exports = function(grunt) {
     grunt.registerTask('package', function() {
         var version = grunt.config('pkg.version');
         var packageName = grunt.config('packageName');
-        execSync.exec('tar czf ' + packageName + ' index.html js bower_components');
+        execSync.exec('tar czf ' + packageName + ' index.html js bower_components package.json');
     });
 
     grunt.registerTask('deploy', [
