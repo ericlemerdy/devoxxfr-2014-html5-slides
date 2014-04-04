@@ -1,0 +1,9 @@
+I/  1/  no action 
+        No front server :(
+    2/  docker run
+        Front server, but no app :(
+    3/  grunt package deploy
+        Front server and app v1.0.0 :)
+    4/  npm major && grunt package deploy
+        Front server and app v2.0.0
+
