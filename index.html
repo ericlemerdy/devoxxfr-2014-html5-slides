@@ -60,91 +60,127 @@
         </div>
 		<img src="pictures/cover.jpg" alt="">
 	</div></section>
-    <section class="slide cover title"><div>
-        <div class="color1"></div><div class="color2"></div><div class="color3"></div>
-        <h1>Il y a un an</h1>
-		<img src="pictures/cover.jpg" alt="">
-        <p class="footer"><a class="hashtag" href="https://twitter.com/search?q=%23deboxxbtc">#devoxx</a><span class="twitter"><img src="pictures/twitter.png"><a href="https://twitter.com/your_twitter" rel="me" class="twitter">@your_twitter</a></span></p>
-    </div></section>
-    <section class="slide"><div>
-        <h2>On est venu faire tirer du cable à des développeurs</h2>
-        <img style="float: left; width: 385px; margin-right: 10px;" src="pictures/devops-1.jpeg">
-        <img style="float: left; width: 385px;" src="pictures/devops-2.jpg">
-    </div></section>
-    <section class="slide"><div>
-        <h2>On a fait manipuler puppet</h2>
-        <img src="pictures/catbug_and_his_impossibear_puppet_by_mranyone-d62aewy.gif"><br>
-        <small><a href="http://mranyone.deviantart.com/art/Catbug-and-his-Impossibear-puppet-366642178">réf. photo</a></small>
-    </div></section>
-    <section class="slide"><div>
-        <h2>1 an après, on vous fait la démo.</h2>
-        <div style="float:left;">
-            <img style="width: 250px; margin-right: 10px;" src="pictures/see_you_next_mission_slide_by_narishm-d6uu9vn.png"><br>
-            <small><a href="http://narishm.deviantart.com/art/See-You-Next-Mission-Slide-414598019">réf. photo</a></small>
-        </div>
-        <div>Allumez vos téléphones sur le wifi <strong>MEPC</strong></div>
-        <div>Votre mission est de vérifier qu'on va déployer en continu.</div>
-        <p>
-            <h2>http://change.me/todo</h2>
-        </p>
-    </div></section>
-    <section class="slide cover title"><div>
-        <div class="color1"></div><div class="color2"></div><div class="color3"></div>
-        <h1>Étape 0 : rien</h1>
-        <img src="pictures/cover.jpg" alt="">
-        <p class="footer"><a class="hashtag" href="https://twitter.com/search?q=%23deboxxbtc">#devoxx</a><span class="twitter"><img src="pictures/twitter.png"><a href="https://twitter.com/your_twitter" rel="me" class="twitter">@your_twitter</a></span></p>
-    </div></section>
-    <section class="slide"><div>
+    <section class="slide">
         <div>
-            Au commencement était le code et la prod n'existait pas.
+            <blockquote>
+                None of this stuff is really new.<br>
+                <img src="pictures/Jez-Humble.png"><br>
+                What has changed is we developed new patterns and practices and<br>
+                we have new tools that enable us to do this.
+            </blockquote>
+            <p>- Jez Humble, oct. 2012</p>
         </div>
-        <img src="pictures/nothing.png" style="width: 280px;"/>
-    </div></section>
-    <section class="slide cover title"><div>
-        <div class="color1"></div><div class="color2"></div><div class="color3"></div>
-        <h1>Étape 1 : déployons</h1>
-        <img src="pictures/cover.jpg" alt="">
-        <p class="footer"><a class="hashtag" href="https://twitter.com/search?q=%23deboxxbtc">#devoxx</a><span class="twitter"><img src="pictures/twitter.png"><a href="https://twitter.com/your_twitter" rel="me" class="twitter">@your_twitter</a></span></p>
-    </div></section>
-    <section class="slide"><div>
-        <h2>Gentlemen, start your engines</h2>
-        <ul>
-            <li>
-                Construit et taggue une image Docker (un conteneur web ngnix)<br>
-                <blockquote>build_front.sh :</blockquote>
-                <code>cd front</code><br>
-                <code>docker build --rm -t mepc/front:1 .</code>
-            <li>
-                Lance une instance :<br>
-                <blockquote>run_front.sh :</blockquote>
-                <code>docker run -d -t -p 2222:22 -p 8080:80 --name front mepc/front</code><br>
-        </ul>
-    </div></section>
-    <section class="slide"><div>
-        <h2>Ça marche ?</h2>
-        <div>Non parce qu'on a rien mis dans le serveur</div>
-    </div></section>
-    <section class="slide"><div>
-        <h2>Gentlemen, ... deploy ?!? your engines ?</h2>
+    </section>
+    <section class="slide cover title">
         <div>
-            Dans le front :
-            <code>npm install</code>
-            <code>grunt package deploy</code>
+            <div class="color1"></div><div class="color2"></div><div class="color3"></div>
+            <h1>Il y a un an</h1>
+    		<img src="pictures/cover.jpg" alt="">
+            <p class="footer"><a class="hashtag" href="https://twitter.com/search?q=%23deboxxbtc">#devoxx</a><span class="twitter"><img src="pictures/twitter.png"><a href="https://twitter.com/your_twitter" rel="me" class="twitter">@your_twitter</a></span></p>
         </div>
-    </div></section>
-    <section class="slide"><div>
-        <h2>Et maintenant, ça marche ?</h2>
-        <div>Apparemment, oui !</div>
-        <img src="pictures/front1.png" style="width: 280px;"/>
-    </div></section>
-    <section class="slide"><div>
-        <h2>Encore, encore !!</h2>
+    </section>
+    <section class="slide">
         <div>
-            Rien de plus simple :
-            <code>grunt package deploy</code>
+            <h2>On est venu faire tirer du cable à des développeurs</h2>
+            <img style="float: left; width: 385px; margin-right: 10px;" src="pictures/devops-1.jpeg">
+            <img style="float: left; width: 385px;" src="pictures/devops-2.jpg">
         </div>
-        <img src="pictures/tada.gif" style="width: 280px"/>
-    </div></section>
+    </section>
+    <section class="slide">
+        <div>
+            <h2>On a fait manipuler puppet</h2>
+            <img src="pictures/catbug_and_his_impossibear_puppet_by_mranyone-d62aewy.gif"><br>
+            <small><a href="http://mranyone.deviantart.com/art/Catbug-and-his-Impossibear-puppet-366642178">réf. photo</a></small>
+        </div>
+    </section>
+    <section class="slide">
+        <div>
+            <h2>1 an après, on vous fait la démo.</h2>
+            <div style="float:left;">
+                <img style="width: 250px; margin-right: 10px;" src="pictures/see_you_next_mission_slide_by_narishm-d6uu9vn.png"><br>
+                <small><a href="http://narishm.deviantart.com/art/See-You-Next-Mission-Slide-414598019">réf. photo</a></small>
+            </div>
+            <div>Allumez vos téléphones sur le wifi <strong>MEPC</strong></div>
+            <div>Votre mission est de vérifier qu'on va déployer en continu.</div>
+            <p>
+                <h2>http://change.me/todo</h2>
+            </p>
+        </div>
+    </section>
+    <section class="slide cover title">
+        <div>
+            <div class="color1"></div><div class="color2"></div><div class="color3"></div>
+            <h1>Étape 0 : rien</h1>
+            <img src="pictures/cover.jpg" alt="">
+            <p class="footer"><a class="hashtag" href="https://twitter.com/search?q=%23deboxxbtc">#devoxx</a><span class="twitter"><img src="pictures/twitter.png"><a href="https://twitter.com/your_twitter" rel="me" class="twitter">@your_twitter</a></span></p>
+        </div>
+    </section>
+    <section class="slide">
+        <div>
+            <img src="pictures/nothing.png" style="width: 280px;"/>
+        </div>
+    </section>
+    <section class="slide cover title">
+        <div>
+            <div class="color1"></div><div class="color2"></div><div class="color3"></div>
+            <h1>Étape 1 : déployons</h1>
+            <img src="pictures/cover.jpg" alt="">
+            <p class="footer"><a class="hashtag" href="https://twitter.com/search?q=%23deboxxbtc">#devoxx</a><span class="twitter"><img src="pictures/twitter.png"><a href="https://twitter.com/your_twitter" rel="me" class="twitter">@your_twitter</a></span></p>
+        </div>
+    </section>
+    <section class="slide">
+        <div>
+            <h2>Gentlemen, start your engines</h2>
+            <ul>
+                <li>
+                    Construit et taggue une image Docker (un conteneur web ngnix)<br>
+                    <blockquote>build_front.sh :</blockquote>
+                    <code>cd front</code><br>
+                    <code>docker build --rm -t mepc/front:1 .</code>
+                <li>
+                    Lance une instance :<br>
+                    <blockquote>run_front.sh :</blockquote>
+                    <code>docker run -d -t -p 2222:22 -p 8080:80 --name front mepc/front</code><br>
+            </ul>
+        </div>
+    </section>
+    <section class="slide">
+        <div>
+            <h2>Ça marche ?</h2>
+            <div>Non parce qu'on a rien mis dans le serveur</div>
+        </div>
+    </section>
+    <section class="slide">
+        <div>
+            <h2>Gentlemen, ... deploy ?!? your engines ?</h2>
+            <div>
+                Dans le front :<br>
+                <code>npm install</code><br>
+                <code>grunt package deploy</code>
+            </div>
+        </div>
+    </section>
+    <section class="slide">
+        <div>
+            <h2>Et maintenant, ça marche ?</h2>
+        </div>
+    </section>
+    <section class="slide">
+        <div>
+            <h2>Encore, encore !!</h2>
+            <div>
+                Rien de plus simple :<br>
+                <code>grunt package deploy</code>
+            </div>
+            <img src="pictures/tada.gif" style="width: 280px"/>
+        </div>
+    </section>
+    <section class="slide">
+        <div>
+            <blockquote>Every build is a Release Candidate</blockquote>
+            <p>- Jez Humble</p>
+        </div>
+    </section>
     <div class="progress"><div></div></div>
     <!-- Custom shower build, see https://github.com/your_twitter/shower/commit/a621cf451f24b74f70233cc91f6d934904dd4ae4 -->
 	<script src="shower/shower.min.js"></script>
