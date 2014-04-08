@@ -3,45 +3,55 @@ import "jenkins.pp"
 include jenkins
 
 package { "git":
-  ensure  => "installed"
+  ensure  => "installed",
+  require => Exec [ "apt_update_once" ]
 }
 
-user { "jenkins":
-  groups => "vagrant"
+file { "/var/lib/jenkins/jobs/build-front/":
+  ensure  => "directory",
+  group   => "nogroup",
+  owner   => "jenkins",
+  require => Exec [ "install_jenkins" ],
+  notify  => Service [ "jenkins" ]
+}
+
+file { "/var/lib/jenkins/jobs/build-front/config.xml":
+  ensure  => "file",
+  group   => "nogroup",
+  owner   => "jenkins",
+  source  => "/vagrant/files/build-front.xml",
+  require => File [ "/var/lib/jenkins/jobs/build-front/" ],
+  notify  => Service [ "jenkins" ]
 }
 
 file { "/etc/default/jenkins":
-  ensure => "file",
-  owner  => "root",
-  group  => "root",
-  source => "/vagrant/files/jenkins",
-  require => Package [ "jenkins" ]
+  ensure  => "file",
+  owner   => "root",
+  group   => "root",
+  source  => "/vagrant/files/jenkins",
+  require => Exec [ "install_jenkins" ],
+  notify  => Service [ "jenkins" ]
 }
 
-exec { "/usr/bin/wget -O /var/lib/jenkins/plugins/git.hpi http://updates.jenkins-ci.org/latest/git.hpi":
-  creates => "/var/lib/jenkins/plugins/git.hpi",
-  user    => "jenkins",
-  notify  => Service [ "jenkins" ],
-  require => Exec [
-    "/usr/bin/wget -O /var/lib/jenkins/plugins/git-client.hpi http://updates.jenkins-ci.org/latest/git-client.hpi",
-    "/usr/bin/wget -O /var/lib/jenkins/plugins/scm-api.hpi http://updates.jenkins-ci.org/latest/scm-api.hpi"
-  ]
+define jenkins_plugin ($plugin) {
+  file { "/var/lib/jenkins/plugins/$plugin.hpi":
+    ensure  => "file",
+    owner   => "jenkins",
+    group   => "nogroup",
+    source  => "/vagrant/files/$plugin.hpi",
+    require => Exec [ "install_jenkins" ],
+    notify  => Service [ "jenkins" ]
+  }
 }
 
-exec { "/usr/bin/wget -O /var/lib/jenkins/plugins/git-client.hpi http://updates.jenkins-ci.org/latest/git-client.hpi":
-  creates => "/var/lib/jenkins/plugins/git-client.hpi",
-  user    => "jenkins",
-  require => Package [
-    "jenkins",
-    "git"
-  ]
+jenkins_plugin { "scm-api":
+  plugin => "scm-api"
 }
 
-exec { "/usr/bin/wget -O /var/lib/jenkins/plugins/scm-api.hpi http://updates.jenkins-ci.org/latest/scm-api.hpi":
-  creates => "/var/lib/jenkins/plugins/scm-api.hpi",
-  user    => "jenkins",
-  require => Package [
-    "jenkins",
-    "git"
-  ]
+jenkins_plugin { "git-client":
+  plugin => "git-client"
+}
+
+jenkins_plugin { "git":
+  plugin => "git"
 }
