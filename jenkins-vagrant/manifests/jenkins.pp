@@ -1,20 +1,18 @@
 class jenkins {
   include apt
 
-  apt::key { "jenkins":
-    key        => "D50582E6",
-    key_source => "http://pkg.jenkins-ci.org/debian/jenkins-ci.org.key"
-  }
-
-  file { "/etc/apt/sources.list.d/jenkins.list":
-    ensure   => "file",
-    content  => "deb http://pkg.jenkins-ci.org/debian binary/",
-    require  => Apt::Key[ "jenkins" ]
+  apt::source { "jenkins":
+    location    => "http://pkg.jenkins-ci.org/debian",
+    release     => "binary/",
+    repos       => "",
+    key         => "D50582E6",
+    key_source  => "http://pkg.jenkins-ci.org/debian/jenkins-ci.org.key",
+    include_src => false
   }
 
   package { "jenkins":
     ensure  => "installed",
-    require => File [ "/etc/apt/sources.list.d/jenkins.list" ]
+    require => Apt::Source [ "jenkins" ]
   }
 
   service { "jenkins":
