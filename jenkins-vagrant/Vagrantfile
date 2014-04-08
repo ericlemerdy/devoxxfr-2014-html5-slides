@@ -3,6 +3,7 @@ VAGRANTFILE_API_VERSION = "2"
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.box = "base"
   config.vm.synced_folder "../", "/var/devoxx-2014-mepc/"
+  config.vm.synced_folder "jobs/", "/var/lib/jenkins/jobs/", owner: "jenkins", group: "nogroup"
   config.vm.network :private_network, ip: "10.10.10.2"
   config.vm.provision "puppet" do |puppet|
     puppet.options = "--verbose --debug"

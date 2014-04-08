@@ -6,6 +6,10 @@ package { "git":
   ensure  => "installed"
 }
 
+user { "jenkins":
+  groups => "vagrant"
+}
+
 file { "/etc/default/jenkins":
   ensure => "file",
   owner  => "root",
