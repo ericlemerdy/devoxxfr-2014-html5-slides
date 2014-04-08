@@ -3,20 +3,6 @@ module.exports = function(grunt) {
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
         packageName: "app-<%= pkg.version %>.tar.gz",
-        sshconfig: {
-            blue: {
-                host: '127.0.0.1',
-                port: 2222,
-                username: 'root',
-                password: 'mepcRul3Z'
-            },
-            green: {
-                host: '127.0.0.1',
-                port: 2200,
-                username: 'root',
-                password: 'mepcRul3Z'
-            }
-        },
         sftp: {
             deploy: {
                 files: {
@@ -38,7 +24,6 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-ssh');
 
     grunt.registerTask('package', function() {
-        var version = grunt.config('pkg.version');
         var packageName = grunt.config('packageName');
         execSync.exec('tar czf ' + packageName + ' index.html js bower_components package.json');
     });
