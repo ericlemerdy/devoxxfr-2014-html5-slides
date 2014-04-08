@@ -1,10 +1,14 @@
+import "apt.pp"
 import "jenkins.pp"
+import "nodejs.pp"
 
+include apt
 include jenkins
+include nodejs
 
 package { "git":
   ensure  => "installed",
-  require => Exec [ "apt_update_once" ]
+  require => Exec [ "apt-get update" ]
 }
 
 file { "/var/lib/jenkins/jobs/build-front/":
@@ -22,6 +26,16 @@ file { "/var/lib/jenkins/jobs/build-front/config.xml":
   source  => "/vagrant/files/build-front.xml",
   require => File [ "/var/lib/jenkins/jobs/build-front/" ],
   notify  => Service [ "jenkins" ]
+}
+
+package { "make":
+  ensure  => "installed",
+  require => File [ "/var/lib/jenkins/jobs/build-front/config.xml" ]
+}
+
+package { "g++":
+  ensure  => "installed",
+  require => File [ "/var/lib/jenkins/jobs/build-front/config.xml" ]
 }
 
 file { "/etc/default/jenkins":
