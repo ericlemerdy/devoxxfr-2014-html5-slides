@@ -28,4 +28,27 @@ class jenkins {
     groups  => "vagrant",
     require => Exec [ "install_jenkins" ]
   }
+
+  exec { "wait for jenkins":
+    require => Service [ "jenkins" ],
+    command => "/usr/bin/wget --spider --tries 10 --retry-connrefused http://10.10.10.2:8080/api/json",
+  }
+
+  define plugin ($plugin) {
+    file { "/var/lib/jenkins/plugins/$plugin":
+      ensure  => "file",
+      owner   => "jenkins",
+      group   => "nogroup",
+      source  => "/vagrant/files/$plugin",
+      require => Exec [ "wait for jenkins" ]
+    }
+  }
+
+  file { "/etc/default/jenkins":
+    ensure  => "file",
+    owner   => "root",
+    group   => "root",
+    source  => "/vagrant/files/jenkins",
+    require => Exec [ "wait for jenkins" ]
+  }
 }

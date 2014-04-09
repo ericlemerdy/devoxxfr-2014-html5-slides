@@ -15,8 +15,7 @@ file { "/var/lib/jenkins/jobs/build-front/":
   ensure  => "directory",
   group   => "nogroup",
   owner   => "jenkins",
-  require => Exec [ "install_jenkins" ],
-  notify  => Service [ "jenkins" ]
+  require => Exec [ "wait for jenkins" ]
 }
 
 file { "/var/lib/jenkins/jobs/build-front/config.xml":
@@ -24,8 +23,22 @@ file { "/var/lib/jenkins/jobs/build-front/config.xml":
   group   => "nogroup",
   owner   => "jenkins",
   source  => "/vagrant/files/build-front.xml",
-  require => File [ "/var/lib/jenkins/jobs/build-front/" ],
-  notify  => Service [ "jenkins" ]
+  require => File [ "/var/lib/jenkins/jobs/build-front/" ]
+}
+
+file { "/var/lib/jenkins/jobs/deploy-front/":
+  ensure  => "directory",
+  group   => "nogroup",
+  owner   => "jenkins",
+  require => Exec [ "wait for jenkins" ]
+}
+
+file { "/var/lib/jenkins/jobs/deploy-front/config.xml":
+  ensure  => "file",
+  group   => "nogroup",
+  owner   => "jenkins",
+  source  => "/vagrant/files/deploy-front.xml",
+  require => File [ "/var/lib/jenkins/jobs/deploy-front/" ]
 }
 
 package { "make":
@@ -38,46 +51,26 @@ package { "g++":
   require => File [ "/var/lib/jenkins/jobs/build-front/config.xml" ]
 }
 
-file { "/etc/default/jenkins":
-  ensure  => "file",
-  owner   => "root",
-  group   => "root",
-  source  => "/vagrant/files/jenkins",
-  require => Exec [ "install_jenkins" ],
-  notify  => Service [ "jenkins" ]
-}
-
-define jenkins_plugin ($plugin) {
-  file { "/var/lib/jenkins/plugins/$plugin":
-    ensure  => "file",
-    owner   => "jenkins",
-    group   => "nogroup",
-    source  => "/vagrant/files/$plugin",
-    require => Exec [ "install_jenkins" ],
-    notify  => Service [ "jenkins" ]
-  }
-}
-
-jenkins_plugin { "scm-api":
+jenkins::plugin { "scm-api":
   plugin => "scm-api.hpi"
 }
 
-jenkins_plugin { "git-client":
+jenkins::plugin { "git-client":
   plugin => "git-client.hpi"
 }
 
-jenkins_plugin { "git":
+jenkins::plugin { "git":
   plugin => "git.hpi"
 }
 
-jenkins_plugin { "jquery":
+jenkins::plugin { "jquery":
   plugin => "jquery.jpi"
 }
 
-jenkins_plugin { "parameterized-trigger":
+jenkins::plugin { "parameterized-trigger":
   plugin => "parameterized-trigger.jpi"
 }
 
-jenkins_plugin { "build-pipeline-plugin":
+jenkins::plugin { "build-pipeline-plugin":
   plugin => "build-pipeline-plugin.jpi"
 }
