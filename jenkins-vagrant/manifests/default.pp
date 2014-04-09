@@ -48,24 +48,36 @@ file { "/etc/default/jenkins":
 }
 
 define jenkins_plugin ($plugin) {
-  file { "/var/lib/jenkins/plugins/$plugin.hpi":
+  file { "/var/lib/jenkins/plugins/$plugin":
     ensure  => "file",
     owner   => "jenkins",
     group   => "nogroup",
-    source  => "/vagrant/files/$plugin.hpi",
+    source  => "/vagrant/files/$plugin",
     require => Exec [ "install_jenkins" ],
     notify  => Service [ "jenkins" ]
   }
 }
 
 jenkins_plugin { "scm-api":
-  plugin => "scm-api"
+  plugin => "scm-api.hpi"
 }
 
 jenkins_plugin { "git-client":
-  plugin => "git-client"
+  plugin => "git-client.hpi"
 }
 
 jenkins_plugin { "git":
-  plugin => "git"
+  plugin => "git.hpi"
+}
+
+jenkins_plugin { "jquery":
+  plugin => "jquery.jpi"
+}
+
+jenkins_plugin { "parameterized-trigger":
+  plugin => "parameterized-trigger.jpi"
+}
+
+jenkins_plugin { "build-pipeline-plugin":
+  plugin => "build-pipeline-plugin.jpi"
 }
