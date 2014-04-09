@@ -30,7 +30,8 @@
     <hudson.tasks.Shell>
       <command>cd todomvc/angularjs/
 npm install
-node_modules/git-release/bin/git-release
+echo &quot;
+n&quot; | node_modules/git-release/bin/git-release
 node_modules/grunt-cli/bin/grunt package</command>
     </hudson.tasks.Shell>
   </builders>
