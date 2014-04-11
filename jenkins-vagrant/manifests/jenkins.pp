@@ -31,6 +31,7 @@ class jenkins {
 
   exec { "wait for jenkins":
     require => Service [ "jenkins" ],
+    logoutput   => "on_failure",
     command => "/usr/bin/wget --spider --tries 10 --retry-connrefused http://10.10.10.2:8080/api/json",
   }
 
