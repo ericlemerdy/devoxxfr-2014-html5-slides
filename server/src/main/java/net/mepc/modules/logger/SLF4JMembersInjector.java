@@ -1,8 +1,9 @@
 package net.mepc.modules.logger;
 
-import com.google.inject.MembersInjector;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import com.google.inject.MembersInjector;
 
 import java.lang.reflect.Field;
 

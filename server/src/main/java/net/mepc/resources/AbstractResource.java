@@ -1,7 +1,8 @@
 package net.mepc.resources;
 
-import net.mepc.server.ServerConfig;
 import org.slf4j.Logger;
+
+import net.mepc.server.ServerConfig;
 
 
 public abstract class AbstractResource {

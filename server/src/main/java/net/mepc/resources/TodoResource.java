@@ -4,26 +4,25 @@ import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
 import static javax.ws.rs.core.Response.noContent;
 import static javax.ws.rs.core.Response.ok;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.ResponseBuilder;
-
-import net.mepc.model.Todo;
-import net.mepc.repository.db.MongoServer;
 
 import org.bson.types.ObjectId;
 import org.jongo.MongoCollection;
 
 import com.google.inject.Inject;
+
+import net.mepc.model.Todo;
+import net.mepc.repository.db.MongoServer;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Path("/")
 public class TodoResource extends AbstractResource {

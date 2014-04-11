@@ -1,6 +1,7 @@
 package net.mepc.modules;
 
 import com.google.inject.AbstractModule;
+
 import net.mepc.repository.db.MongoConfiguration;
 import net.mepc.repository.db.MongoServer;
 

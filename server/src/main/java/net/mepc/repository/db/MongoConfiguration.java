@@ -1,9 +1,9 @@
 package net.mepc.repository.db;
 
+import static java.text.MessageFormat.format;
+
 import com.google.inject.Inject;
 import com.mongodb.MongoClientURI;
-
-import static java.text.MessageFormat.format;
 
 public class MongoConfiguration {
 	private static MongoConfiguration configuration = new MongoConfiguration();

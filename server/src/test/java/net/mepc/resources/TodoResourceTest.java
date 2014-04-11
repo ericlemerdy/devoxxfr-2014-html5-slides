@@ -6,13 +6,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.ws.rs.core.Response;
-
-import net.mepc.model.Todo;
-import net.mepc.repository.db.MongoServer;
 
 import org.bson.types.ObjectId;
 import org.jongo.Find;
@@ -20,14 +14,13 @@ import org.jongo.MongoCollection;
 import org.junit.Test;
 import org.mockito.Mockito;
 
-import com.google.common.collect.Collections2;
-import com.google.common.collect.ImmutableCollection;
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.Iterables;
-import com.google.common.collect.Lists;
 import com.mongodb.WriteResult;
 
+import net.mepc.model.Todo;
+import net.mepc.repository.db.MongoServer;
 
+import java.util.ArrayList;
+import java.util.List;
 
 public class TodoResourceTest {
 	@Test
