@@ -8,7 +8,7 @@
     <configVersion>2</configVersion>
     <userRemoteConfigs>
       <hudson.plugins.git.UserRemoteConfig>
-        <url>file:///var/devoxx-2014-mepc/</url>
+        <url>/var/git/devoxx-2014-mepc-bare/</url>
       </hudson.plugins.git.UserRemoteConfig>
     </userRemoteConfigs>
     <branches>
@@ -18,7 +18,11 @@
     </branches>
     <doGenerateSubmoduleConfigurations>false</doGenerateSubmoduleConfigurations>
     <submoduleCfg class="list"/>
-    <extensions/>
+    <extensions>
+      <hudson.plugins.git.extensions.impl.LocalBranch>
+        <localBranch>step1</localBranch>
+      </hudson.plugins.git.extensions.impl.LocalBranch>
+    </extensions>
   </scm>
   <canRoam>true</canRoam>
   <disabled>false</disabled>
