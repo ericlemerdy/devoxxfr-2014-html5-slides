@@ -178,6 +178,36 @@
     </section>
     <section class="slide">
         <div>
+            <h2>Et comment est-ce que je conquiert le monde ?</h2>
+            <img src="pictures/cartoon-pinky-and-the-brain_00215944.jpg" style="width: 475px"><br/>
+            <small><a href="http://bit.ly/1i7pYvf">réf. photo</a></small>
+        </div>
+    </section>
+    <section class="slide">
+        <div>
+            <h2>Déployons un backend !</h2>
+            <div style="float: right">
+                <img src="pictures/ENIAC.jpg" style="height: 200px"><br/>
+                <small style="float: right"><a href="http://bit.ly/1iAoExs">réf. photo</a></small>
+            </div>
+            <ul style="margin-top: 175px">
+                <li>
+                    load balancer : <br/>
+                    <code>docker run -d -p 8080:80 --name rp hipache</code>
+                </li>
+                <li>
+                    mongodb :<br/>
+                    <code>docker run -d --expose 27017 --name db mepc/db</code>
+                </li>
+                <li>
+                    appli : <br/>
+                    <code>docker run -d --expose 8080 --name app-blue mepc/app:1.0</code><strong> => WAT ?</strong>
+                </li>
+            </ul>
+        </div>
+    </section>
+    <section class="slide">
+        <div>
             <blockquote>Every build is a Release Candidate</blockquote>
             <p>- Jez Humble</p>
         </div>
