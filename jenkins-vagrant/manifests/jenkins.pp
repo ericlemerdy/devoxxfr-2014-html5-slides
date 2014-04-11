@@ -8,7 +8,7 @@ class jenkins {
   package { "psmisc"              : ensure => "installed", require => Exec [ "apt-get update" ] }
   package { "default-jre-headless": ensure => "installed", require => Exec [ "apt-get update" ] }
 
-  exec { "install_jenkins":
+  exec { "install jenkins":
     command => "/usr/bin/dpkg -i /vagrant/files/jenkins_1.558_all.deb",
     creates => "/var/lib/jenkins/",
     user    => "root",
@@ -21,18 +21,27 @@ class jenkins {
   service { "jenkins":
     ensure  => running,
     enable  => true,
-    require => Exec [ "install_jenkins" ]
+    require => Exec [ "install jenkins" ]
+  }
+
+  exec { "restart jenkins":
+    command     => "/usr/bin/service jenkins restart",
+    user        => "root",
+    refreshonly => true,
+    require     => Exec [ "install jenkins" ]
   }
 
   user { "jenkins":
     groups  => "vagrant",
-    require => Exec [ "install_jenkins" ]
+    require => Exec [ "install jenkins" ]
   }
 
-  exec { "wait for jenkins":
-    require => Service [ "jenkins" ],
-    logoutput   => "on_failure",
-    command => "/usr/bin/wget --spider --tries 10 --retry-connrefused http://10.10.10.2:8080/api/json",
+  $waitForJenkins = ""
+
+  exec { "jenkins started":
+    logoutput => "true",
+    command   => "/usr/bin/wget --spider --tries 10 --retry-connrefused http://10.10.10.2:8080/api/json || sleep 2",
+    require   => Service [ "jenkins" ]
   }
 
   define plugin ($plugin) {
@@ -41,7 +50,8 @@ class jenkins {
       owner   => "jenkins",
       group   => "nogroup",
       source  => "/vagrant/files/$plugin",
-      require => Exec [ "wait for jenkins" ]
+      require => Exec [ "jenkins started" ],
+      notify  => Exec [ "restart jenkins" ]
     }
   }
 
@@ -50,6 +60,6 @@ class jenkins {
     owner   => "root",
     group   => "root",
     source  => "/vagrant/files/jenkins",
-    require => Exec [ "wait for jenkins" ]
+    require => Exec [ "jenkins started" ]
   }
 }

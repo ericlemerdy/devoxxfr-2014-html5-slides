@@ -15,7 +15,8 @@ file { "/var/lib/jenkins/jobs/build-front/":
   ensure  => "directory",
   group   => "nogroup",
   owner   => "jenkins",
-  require => Exec [ "wait for jenkins" ]
+  require => Exec [ "jenkins started" ],
+  notify  => Exec [ "restart jenkins" ]
 }
 
 file { "/var/lib/jenkins/jobs/build-front/config.xml":
@@ -30,7 +31,8 @@ file { "/var/lib/jenkins/jobs/deploy-front/":
   ensure  => "directory",
   group   => "nogroup",
   owner   => "jenkins",
-  require => Exec [ "wait for jenkins" ]
+  require => Exec [ "jenkins started" ],
+  notify  => Exec [ "restart jenkins" ]
 }
 
 file { "/var/lib/jenkins/jobs/deploy-front/config.xml":
@@ -38,7 +40,8 @@ file { "/var/lib/jenkins/jobs/deploy-front/config.xml":
   group   => "nogroup",
   owner   => "jenkins",
   source  => "/vagrant/files/deploy-front.xml",
-  require => File [ "/var/lib/jenkins/jobs/deploy-front/" ]
+  require => File [ "/var/lib/jenkins/jobs/deploy-front/" ],
+  notify  => Exec [ "restart jenkins" ]
 }
 
 package { "make":
