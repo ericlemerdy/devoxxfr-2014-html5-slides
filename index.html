@@ -178,7 +178,7 @@
     </section>
     <section class="slide">
         <div>
-            <h2>Et comment est-ce que je conquiert le monde ?</h2>
+            <h2>Et comment est-ce que je conquiers le monde ?</h2>
             <img src="pictures/cartoon-pinky-and-the-brain_00215944.jpg" style="width: 475px"><br/>
             <small><a href="http://bit.ly/1i7pYvf">réf. photo</a></small>
         </div>
@@ -201,17 +201,48 @@
                 </li>
                 <li>
                     appli : <br/>
-                    <code>docker run -d --expose 8080 --link rp --name app-blue mepc/app:1.0</code><br/>
+                    <code>docker run -d --expose 8080 --name app-blue mepc/app:1.0</code><br/>
                     <strong> => WAT ?</strong>
                 </li>
             </ul>
         </div>
     </section>
     <section class="slide">
-        <div>
+        <div style="padding-top: 20%">
             <blockquote>Every build is a Release Candidate</blockquote>
             <p>- Jez Humble</p>
         </div>
+    </section>
+    <section class="slide">
+        <div>
+            <h2>Chaque build génère un livrable<br/>
+                "prodable"</h2>
+            <h3>1 build = 1 image docker</h3>
+            <code>
+                docker build -t mepc/app:1.0 .
+            </code><br/>
+            <code>
+                docker save -o mepc_app-1.0.tar mepc/app:1.0
+            </code>
+            <h3>1 image docker = 1 déploiement</h3>
+            <code style="font-size: xx-small">
+                curl --data-binary @mepc_app-1.0.tar -H 'Content-type: application/tar' http://10.0.2.2:4243/images/create?fromSrc=-&repo=mepc/app&tag=1.0
+            </code><br/>
+            <code style="font-size: xx-small">
+                    curl --data-binary '{"Image":"mepc/app:1.0","ExposedPorts":{"8080/tcp":{}}}' -H 'Content-Type: application/json' \
+            </code><br/>
+            <code style="font-size: xx-small;margin-top: -1em;display: block;width: 30em;">
+                    'http://10.0.2.2:4243/containers/create?name=app-blue'
+            </code><br/>
+            <code style="font-size: xx-small;display: block;margin-top: -2em;">
+                curl --data-binary '{ "Links": [ "db:db" ] }' -H 'Content-Type: application/json' 'http://127.0.0.1:4243/containers/app-blue/start'
+            </code>
+        </div>
+    </section>
+    <section class="slide">
+        <h2>Un livrable validé part en prod</h2>
+        <h3>Bascule sur le nouveau backend</h3>
+        <code></code>
     </section>
     <div class="progress"><div></div></div>
     <!-- Custom shower build, see https://github.com/your_twitter/shower/commit/a621cf451f24b74f70233cc91f6d934904dd4ae4 -->
