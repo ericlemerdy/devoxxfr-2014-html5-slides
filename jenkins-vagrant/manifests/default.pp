@@ -12,6 +12,15 @@ package { "git":
   require => Exec [ "apt-get update" ]
 }
 
+file { "/var/lib/jenkins/config.xml":
+  ensure  => "file",
+  group   => "nogroup",
+  owner   => "jenkins",
+  source  => "/vagrant/files/config.xml",
+  require => Exec [ "jenkins started" ],
+  notify  => Exec [ "restart jenkins" ]
+}
+
 file { "/var/lib/jenkins/jobs/build-front/":
   ensure  => "directory",
   group   => "nogroup",
