@@ -46,6 +46,7 @@ public class TodoResourceTest {
 
 		assertThat(response).isNotNull();
 		assertThat(response.getStatus()).isEqualTo(200);
+		@SuppressWarnings("unchecked")
 		List<Todo> todos = (List<Todo>) response.getEntity();
 		assertThat(todos).hasSize(1).startsWith(todo);
 	}
