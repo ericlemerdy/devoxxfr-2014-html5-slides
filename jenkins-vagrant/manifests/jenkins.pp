@@ -62,4 +62,22 @@ class jenkins {
     source  => "/vagrant/files/jenkins",
     require => Exec [ "jenkins started" ]
   }
+
+  define job ($name) {
+    file { "/var/lib/jenkins/jobs/$name/":
+      ensure  => "directory",
+      group   => "nogroup",
+      owner   => "jenkins",
+      require => Exec [ "jenkins started" ],
+      notify  => Exec [ "restart jenkins" ]
+    }
+
+    file { "/var/lib/jenkins/jobs/$name/config.xml":
+      ensure  => "file",
+      group   => "nogroup",
+      owner   => "jenkins",
+      source  => "/vagrant/files/$name.xml",
+      require => File [ "/var/lib/jenkins/jobs/$name/" ]
+    }
+  }
 }

@@ -21,86 +21,24 @@ file { "/var/lib/jenkins/config.xml":
   notify  => Exec [ "restart jenkins" ]
 }
 
-file { "/var/lib/jenkins/jobs/build-front/":
-  ensure  => "directory",
-  group   => "nogroup",
-  owner   => "jenkins",
-  require => Exec [ "jenkins started" ],
-  notify  => Exec [ "restart jenkins" ]
-}
-
-file { "/var/lib/jenkins/jobs/build-front/config.xml":
-  ensure  => "file",
-  group   => "nogroup",
-  owner   => "jenkins",
-  source  => "/vagrant/files/build-front.xml",
-  require => File [ "/var/lib/jenkins/jobs/build-front/" ]
-}
-
-file { "/var/lib/jenkins/jobs/deploy-front/":
-  ensure  => "directory",
-  group   => "nogroup",
-  owner   => "jenkins",
-  require => Exec [ "jenkins started" ],
-  notify  => Exec [ "restart jenkins" ]
-}
-
-file { "/var/lib/jenkins/jobs/deploy-front/config.xml":
-  ensure  => "file",
-  group   => "nogroup",
-  owner   => "jenkins",
-  source  => "/vagrant/files/deploy-front.xml",
-  require => File [ "/var/lib/jenkins/jobs/deploy-front/" ],
-  notify  => Exec [ "restart jenkins" ]
-}
-
-file { "/var/lib/jenkins/jobs/build-back/":
-  ensure  => "directory",
-  group   => "nogroup",
-  owner   => "jenkins",
-  require => Exec [ "jenkins started" ],
-  notify  => Exec [ "restart jenkins" ]
-}
-
-file { "/var/lib/jenkins/jobs/build-back/config.xml":
-  ensure  => "file",
-  group   => "nogroup",
-  owner   => "jenkins",
-  source  => "/vagrant/files/build-back.xml",
-  require => File [ "/var/lib/jenkins/jobs/build-back/" ],
-  notify  => Exec [ "restart jenkins" ]
-}
+jenkins::job { "build-front":  name => "build-front"  }
+jenkins::job { "deploy-front": name => "deploy-front" }
+jenkins::job { "build-back":   name => "build-back"   }
 
 package { "make":
   ensure  => "installed",
-  require => File [ "/var/lib/jenkins/jobs/build-front/config.xml" ]
+  require => Jenkins::Job [ "build-front" ]
 }
 
 package { "g++":
   ensure  => "installed",
-  require => File [ "/var/lib/jenkins/jobs/build-front/config.xml" ]
+  require => Jenkins::Job [ "build-front" ]
 }
 
-jenkins::plugin { "scm-api":
-  plugin => "scm-api.hpi"
-}
+jenkins::plugin { "scm-api":               plugin => "scm-api.hpi"               }
+jenkins::plugin { "git-client":            plugin => "git-client.hpi"            }
+jenkins::plugin { "git":                   plugin => "git.hpi"                   }
+jenkins::plugin { "jquery":                plugin => "jquery.jpi"                }
+jenkins::plugin { "parameterized-trigger": plugin => "parameterized-trigger.jpi" }
+jenkins::plugin { "build-pipeline-plugin": plugin => "build-pipeline-plugin.jpi" }
 
-jenkins::plugin { "git-client":
-  plugin => "git-client.hpi"
-}
-
-jenkins::plugin { "git":
-  plugin => "git.hpi"
-}
-
-jenkins::plugin { "jquery":
-  plugin => "jquery.jpi"
-}
-
-jenkins::plugin { "parameterized-trigger":
-  plugin => "parameterized-trigger.jpi"
-}
-
-jenkins::plugin { "build-pipeline-plugin":
-  plugin => "build-pipeline-plugin.jpi"
-}
