@@ -11,12 +11,10 @@ public class ServerConfig {
 	private final String contextRoot;
 	private File workingDirectory;
 	private File assetsDirectory;
-	private Boolean checkToken;
 
 	@Inject
 	public ServerConfig(@Named("listen_port") int port, @Named("context_root") String contextRoot,
-			@Named("working_dir") String workingDirectoryPath, @Named("assets_dir") String assetsDirectoryPath,
-			@Named("check_token") Boolean checkToken) throws FileAlreadyExistsException {
+			@Named("working_dir") String workingDirectoryPath, @Named("assets_dir") String assetsDirectoryPath) throws FileAlreadyExistsException {
 		this.port = port;
 		this.contextRoot = contextRoot;
 		this.assetsDirectory = new File(assetsDirectoryPath);
@@ -38,7 +36,6 @@ public class ServerConfig {
 		} else {
 			this.workingDirectory.mkdirs();
 		}
-		this.checkToken = checkToken;
 	}
 
 	public File getAssetsDirectory() {
@@ -55,10 +52,6 @@ public class ServerConfig {
 
 	public File getWorkingDirectory() {
 		return workingDirectory;
-	}
-
-	public boolean getCheckToken() {
-		return checkToken;
 	}
 
 }

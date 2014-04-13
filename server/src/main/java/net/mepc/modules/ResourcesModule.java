@@ -1,16 +1,20 @@
 package net.mepc.modules;
 
+import org.codehaus.jackson.jaxrs.JacksonJsonProvider;
+import org.codehaus.jackson.map.ObjectMapper;
+
 import com.google.inject.AbstractModule;
 import com.google.inject.Provides;
 import com.google.inject.Singleton;
-import org.codehaus.jackson.jaxrs.JacksonJsonProvider;
-import org.codehaus.jackson.map.ObjectMapper;
+
+import net.mepc.resources.TodoResource;
 
 
 public class ResourcesModule extends AbstractModule {
 
 	@Override
 	protected void configure() {
+		bind(TodoResource.class);
 	}
 
 	@Provides

@@ -1,12 +1,17 @@
 package net.mepc;
 
+import static com.google.inject.matcher.Matchers.any;
+
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.googlecode.sli4j.slf4j.Slf4jLoggingModule;
-import net.mepc.modules.*;
-import net.mepc.server.MepcServer;
 
-import static com.google.inject.matcher.Matchers.any;
+import net.mepc.modules.ConfigModule;
+import net.mepc.modules.DbModule;
+import net.mepc.modules.MepcServletModule;
+import net.mepc.modules.ResourcesModule;
+import net.mepc.modules.ServerModule;
+import net.mepc.server.MepcServer;
 
 
 public class MepcLauncher {

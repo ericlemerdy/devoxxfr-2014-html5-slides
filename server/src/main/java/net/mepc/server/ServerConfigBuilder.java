@@ -32,7 +32,7 @@ public class ServerConfigBuilder {
 	}
 
 	public ServerConfig build() throws FileAlreadyExistsException {
-		return new ServerConfig(port, contextRoot, workingDirectoryPath, assetsDirectoryPath, true);
+		return new ServerConfig(port, contextRoot, workingDirectoryPath, assetsDirectoryPath);
 	}
 
 	public ServerConfigBuilder withContextRoot(String contextRoot) {
