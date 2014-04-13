@@ -6,4 +6,38 @@ I/  1/  no action
         Front server and app v1.0.0 :)
     4/  npm major && grunt package deploy
         Front server and app v2.0.0
-
+        
+1. Intro
+2. Rappel ultra rapide de ce qui s'est passé il y a un an
+3. Deploy front :
+    1. no server, no app
+    2. server, no app
+    3. server, app front v1
+    4. server, app front v2
+4. Présentation rapide de la différence avec la gestion du deploy d'un backend (indispos, rollback, modèle)
+5. Deploy backend
+    1. deploy RP (hipache)
+        1. docker run -d -p 6379:6379 -p 8080:80 --name rp mepc/hipache
+        2. init conf : redis-cli -h 10.0.2.2 rpush frontend:appserver app
+    2. deploy DB (mongo)
+        1. docker run -d mepc/mongo
+6. Présentation build pipeline jenkins
+    1. app release v1 docker image
+        1. docker build -t mepc/app:1.0 .
+        2. docker save -o app_1.0.tar
+    2. deploy app server v1 (blue)
+        1. docker load -i app_1.0.tar
+        2. docker run -d --expose 8080 --link rp --name app-blue mepc/app:1.0
+        3. update hipache
+            1. redis-cli -h 10.0.2.2 linsert frontend:appserver AFTER app http://`curl http://10.0.2.2:4243/containers/test_foo/json |sed 's/.*IPAddress":"\([0-9\.]*\).*/\1/'`:8080
+            2. redis-cli -h 10.0.2.2 ltrim frontend:appserver 0 1
+    3. deploy front v3
+7. Continuous deployment part (build pipeline)
+    1. app release v2 docker image
+    2. deploy app server v2 (green)
+    3. smoke tests v2 (green)
+    4. blue2green switch
+    5. deploy front v4 (open in a new browser tab)
+8. Reverse compatibility part
+    1. front v4 + app v2
+    2. front v3 + app v2
