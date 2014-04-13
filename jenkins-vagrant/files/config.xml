@@ -27,7 +27,7 @@
     </hudson.model.AllView>
     <au.com.centrumsystems.hudson.plugin.buildpipeline.BuildPipelineView plugin="build-pipeline-plugin@1.4.2">
       <owner class="hudson" reference="../../.."/>
-      <name>pipeline</name>
+      <name>Step 1 - front</name>
       <filterExecutors>false</filterExecutors>
       <filterQueue>false</filterQueue>
       <properties class="hudson.model.View$PropertyList"/>
