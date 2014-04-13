@@ -54,6 +54,23 @@ file { "/var/lib/jenkins/jobs/deploy-front/config.xml":
   notify  => Exec [ "restart jenkins" ]
 }
 
+file { "/var/lib/jenkins/jobs/build-back/":
+  ensure  => "directory",
+  group   => "nogroup",
+  owner   => "jenkins",
+  require => Exec [ "jenkins started" ],
+  notify  => Exec [ "restart jenkins" ]
+}
+
+file { "/var/lib/jenkins/jobs/build-back/config.xml":
+  ensure  => "file",
+  group   => "nogroup",
+  owner   => "jenkins",
+  source  => "/vagrant/files/build-back.xml",
+  require => File [ "/var/lib/jenkins/jobs/build-back/" ],
+  notify  => Exec [ "restart jenkins" ]
+}
+
 package { "make":
   ensure  => "installed",
   require => File [ "/var/lib/jenkins/jobs/build-front/config.xml" ]

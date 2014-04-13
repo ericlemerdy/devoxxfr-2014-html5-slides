@@ -13,7 +13,7 @@ class jenkins {
     creates => "/var/lib/jenkins/",
     user    => "root",
     require => [
-      Package [ "daemon", "adduser", "psmisc", "default-jre-headless" ],
+      Package [ "daemon", "adduser", "psmisc", "default-jdk" ],
       Exec [ "apt-get update" ]
     ]
   }
