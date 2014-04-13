@@ -3,10 +3,10 @@ import "apt.pp"
 class jenkins {
   include apt
 
-  package { "daemon"              : ensure => "installed", require => Exec [ "apt-get update" ] }
-  package { "adduser"             : ensure => "installed", require => Exec [ "apt-get update" ] }
-  package { "psmisc"              : ensure => "installed", require => Exec [ "apt-get update" ] }
-  package { "default-jre-headless": ensure => "installed", require => Exec [ "apt-get update" ] }
+  package { "daemon"      : ensure => "installed", require => Exec [ "apt-get update" ] }
+  package { "adduser"     : ensure => "installed", require => Exec [ "apt-get update" ] }
+  package { "psmisc"      : ensure => "installed", require => Exec [ "apt-get update" ] }
+  package { "default-jdk" : ensure => "installed", require => Exec [ "apt-get update" ] }
 
   exec { "install jenkins":
     command => "/usr/bin/dpkg -i /vagrant/files/jenkins_1.558_all.deb",
