@@ -9,6 +9,10 @@ module.exports = function(grunt) {
                     './': "<%= packageName %>"
                 },
                 options: {
+                    host: '127.0.0.1',
+                    port: 22000,
+                    username: 'root',
+                    password: 'mepcRul3Z',
                     path: '/var/www',
                     createDirectories: true
                 }
@@ -16,8 +20,14 @@ module.exports = function(grunt) {
         },
         sshexec: {
             extract: {
-                command: "tar xzf /var/www/<%= packageName %> -C /var/www && rm /var/www/<%= packageName %>"
-            }
+                command: "tar xzf /var/www/<%= packageName %> -C /var/www && rm /var/www/<%= packageName %>",
+                options: {
+                    host: '127.0.0.1',
+                    port: 22000,
+                    username: 'root',
+                    password: 'mepcRul3Z'
+                }
+             }
         }
     });
 
