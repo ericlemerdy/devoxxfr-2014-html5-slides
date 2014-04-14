@@ -3,17 +3,17 @@ import "apt.pp"
 class jenkins {
   include apt
 
-  package { "daemon"      : ensure => "installed", require => Exec [ "apt-get update" ] }
-  package { "adduser"     : ensure => "installed", require => Exec [ "apt-get update" ] }
-  package { "psmisc"      : ensure => "installed", require => Exec [ "apt-get update" ] }
-  package { "default-jdk" : ensure => "installed", require => Exec [ "apt-get update" ] }
+  package { "daemon"        : ensure => "installed", require => Exec [ "apt-get update" ] }
+  package { "adduser"       : ensure => "installed", require => Exec [ "apt-get update" ] }
+  package { "psmisc"        : ensure => "installed", require => Exec [ "apt-get update" ] }
+  package { "openjdk-7-jdk" : ensure => "installed", require => Exec [ "apt-get update" ] }
 
   exec { "install jenkins":
     command => "/usr/bin/dpkg -i /vagrant/files/jenkins_1.558_all.deb",
     creates => "/var/lib/jenkins/",
     user    => "root",
     require => [
-      Package [ "daemon", "adduser", "psmisc", "default-jdk" ],
+      Package [ "daemon", "adduser", "psmisc", "openjdk-7-jdk" ],
       Exec [ "apt-get update" ]
     ]
   }
