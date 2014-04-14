@@ -22,18 +22,19 @@ file { "/var/lib/jenkins/config.xml":
   notify  => Exec [ "restart jenkins" ]
 }
 
+jenkins::job { "test-front":   name => "test-front"   }
 jenkins::job { "build-front":  name => "build-front"  }
 jenkins::job { "deploy-front": name => "deploy-front" }
 jenkins::job { "build-back":   name => "build-back"   }
 
 package { "make":
   ensure  => "installed",
-  require => Jenkins::Job [ "build-front" ]
+  require => Jenkins::Job [ "test-front" ]
 }
 
 package { "g++":
   ensure  => "installed",
-  require => Jenkins::Job [ "build-front" ]
+  require => Jenkins::Job [ "test-front" ]
 }
 
 jenkins::plugin { "scm-api":               plugin => "scm-api.hpi"               }
