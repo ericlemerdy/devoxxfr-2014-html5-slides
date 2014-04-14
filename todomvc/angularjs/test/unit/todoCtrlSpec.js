@@ -3,7 +3,7 @@
 	'use strict';
 
 	describe('Todo Controller', function () {
-		var ctrl, scope;
+		var ctrl, scope, httpBackend;
 		var todoList;
 		var todoStorage = {
 			storage: {},
@@ -18,9 +18,11 @@
 			// Load the module containing the app, only 'ng' is loaded by default.
 		beforeEach(module('todomvc'));
 
-		beforeEach(inject(function ($controller, $rootScope) {
+		beforeEach(inject(function ($controller, $rootScope, $httpBackend, $http) {
 			scope = $rootScope.$new();
-			ctrl = $controller('TodoCtrl', { $scope: scope });
+			httpBackend = $httpBackend;
+			httpBackend.when("GET", "package.json").respond({"version": "42"});
+			ctrl = $controller('TodoCtrl', { $scope: scope, $http: $http });
 		}));
 
 		it('should not have an edited Todo on start', function () {
