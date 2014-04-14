@@ -1,6 +1,7 @@
 import "apt.pp"
 import "jenkins.pp"
 import "nodejs.pp"
+import "maven.pp"
 import "git.pp"
 
 include apt

@@ -63,6 +63,14 @@ class jenkins {
     require => Exec [ "jenkins started" ]
   }
 
+  file { "/var/lib/jenkins/hudson.tasks.Maven.xml":
+    ensure  => "file",
+    owner   => "jenkins",
+    group   => "nogroup",
+    source  => "/vagrant/files/hudson.tasks.Maven.xml",
+    require => Exec [ "jenkins started" ]
+  }
+
   define job ($name) {
     file { "/var/lib/jenkins/jobs/$name/":
       ensure  => "directory",
