@@ -9,7 +9,7 @@ module.exports = function(grunt) {
                     './': "<%= packageName %>"
                 },
                 options: {
-                    host: '127.0.0.1',
+                    host: '10.0.2.2',
                     port: 22000,
                     username: 'root',
                     password: 'mepcRul3Z',
@@ -22,7 +22,7 @@ module.exports = function(grunt) {
             extract: {
                 command: "tar xzf /var/www/<%= packageName %> -C /var/www && rm /var/www/<%= packageName %>",
                 options: {
-                    host: '127.0.0.1',
+                    host: '10.0.2.2',
                     port: 22000,
                     username: 'root',
                     password: 'mepcRul3Z'
