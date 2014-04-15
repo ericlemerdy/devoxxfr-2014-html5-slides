@@ -43,4 +43,6 @@ jenkins::plugin { "git":                   plugin => "git.hpi"                  
 jenkins::plugin { "jquery":                plugin => "jquery.jpi"                }
 jenkins::plugin { "parameterized-trigger": plugin => "parameterized-trigger.jpi" }
 jenkins::plugin { "build-pipeline-plugin": plugin => "build-pipeline-plugin.jpi" }
+jenkins::plugin { "claim":                 plugin => "claim.hpi"                 }
+jenkins::plugin { "z-mon":                 plugin => "z-mon.hpi"                 }
 

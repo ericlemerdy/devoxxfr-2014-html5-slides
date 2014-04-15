@@ -65,6 +65,34 @@
       <refreshFrequency>3</refreshFrequency>
       <showPipelineDefinitionHeader>false</showPipelineDefinitionHeader>
     </au.com.centrumsystems.hudson.plugin.buildpipeline.BuildPipelineView>
+    <jenkins.plugins.zmon.ZMonView plugin="z-mon@1.0-SNAPSHOT">
+      <owner class="hudson" reference="../../.."/>
+      <name>Front</name>
+      <filterExecutors>false</filterExecutors>
+      <filterQueue>false</filterQueue>
+      <properties class="hudson.model.View$PropertyList"/>
+      <jobNames>
+        <comparator class="hudson.util.CaseInsensitiveComparator"/>
+      </jobNames>
+      <jobFilters/>
+      <columns/>
+      <recurse>true</recurse>
+      <millisecondsInAMinute>60000</millisecondsInAMinute>
+      <minutesInAnHour>60.0</minutesInAnHour>
+      <teamName>Mise en production continue</teamName>
+      <teamLogoURL></teamLogoURL>
+      <buildJobName>test-front</buildJobName>
+      <buildDisplay>test</buildDisplay>
+      <deployJobName>build-front</deployJobName>
+      <deployDisplay>build</deployDisplay>
+      <fastTestJob>deploy-front</fastTestJob>
+      <fastTestDisplay>deploy</fastTestDisplay>
+      <mediumTestJob></mediumTestJob>
+      <mediumTestDisplay></mediumTestDisplay>
+      <slowTestJob></slowTestJob>
+      <slowTestDisplay></slowTestDisplay>
+      <refresh>5</refresh>
+    </jenkins.plugins.zmon.ZMonView>
   </views>
   <primaryView>All</primaryView>
   <slaveAgentPort>0</slaveAgentPort>
