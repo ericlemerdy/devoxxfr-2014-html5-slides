@@ -18,7 +18,11 @@
     </branches>
     <doGenerateSubmoduleConfigurations>false</doGenerateSubmoduleConfigurations>
     <submoduleCfg class="list"/>
-    <extensions/>
+    <extensions>
+      <hudson.plugins.git.extensions.impl.LocalBranch>
+        <localBranch>step2</localBranch>
+      </hudson.plugins.git.extensions.impl.LocalBranch>
+    </extensions>
   </scm>
   <canRoam>true</canRoam>
   <disabled>false</disabled>
@@ -46,18 +50,47 @@
   <reporters/>
   <publishers>
     <hudson.tasks.ArtifactArchiver>
-      <artifacts>server/target/mepc-*-server.jar</artifacts>
+      <artifacts>mepc_app-*.tar</artifacts>
       <latestOnly>false</latestOnly>
       <allowEmptyArchive>false</allowEmptyArchive>
     </hudson.tasks.ArtifactArchiver>
   </publishers>
   <buildWrappers/>
   <prebuilders/>
-  <postbuilders/>
+  <postbuilders>
+    <hudson.tasks.Shell>
+      <command>cd server
+RELEASE_VERSION=`grep -m1 version pom.xml |sed &apos;s/.*&lt;version&gt;\([0-9\.]*\).*/\1/&apos;`
+echo FROM mepc/app:base &gt; Dockerfile
+cp target/mepc-${RELEASE_VERSION}-server.jar mepc-server.jar
+whoami
+groups
+docker build -t mepc/app:${RELEASE_VERSION} .
+docker save -o ../mepc_app-${RELEASE_VERSION}.tar mepc/app:${RELEASE_VERSION}
+</command>
+    </hudson.tasks.Shell>
+    <hudson.tasks.Shell>
+      <command>cd server
+OLD_VERSION=`grep -m1 version pom.xml |sed &apos;s/.*&lt;version&gt;\([0-9\.]*\).*/\1/&apos;`
+MAJOR=`echo $OLD_VERSION |awk -F&apos;.&apos; &apos;{ print $1 }&apos;`
+MINOR=`echo $OLD_VERSION |awk -F&apos;.&apos; &apos;{ print $2 }&apos;`
+PATCH=`echo $OLD_VERSION |awk -F&apos;.&apos; &apos;{ print $3 }&apos;`
+NEW_VERSION=$MAJOR.$MINOR.$(($PATCH+1))
+sed -i &quot;0,/&lt;version&gt;${OLD_VERSION}&lt;\/version&gt;/s//&lt;version&gt;${NEW_VERSION}&lt;\/version&gt;/&quot; pom.xml
+</command>
+    </hudson.tasks.Shell>
+    <hudson.tasks.Shell>
+      <command>cd server
+RELEASE_VERSION=`grep -m1 version pom.xml |sed &apos;s/.*&lt;version&gt;\([0-9\.]*\).*/\1/&apos;`
+git add pom.xml
+git commit -m &quot;Release v${RELEASE_VERSION}&quot;
+git push</command>
+    </hudson.tasks.Shell>
+  </postbuilders>
   <runPostStepsIfResult>
-    <name>FAILURE</name>
-    <ordinal>2</ordinal>
-    <color>RED</color>
+    <name>SUCCESS</name>
+    <ordinal>0</ordinal>
+    <color>BLUE</color>
     <completeBuild>true</completeBuild>
   </runPostStepsIfResult>
 </maven2-moduleset>

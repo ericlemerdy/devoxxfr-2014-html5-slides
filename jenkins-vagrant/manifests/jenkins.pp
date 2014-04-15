@@ -32,8 +32,38 @@ class jenkins {
   }
 
   user { "jenkins":
-    groups  => "vagrant",
-    require => Exec [ "install jenkins" ]
+    groups  => [
+      "vagrant", 
+    "docker"],
+    require => [
+      Exec [ "install jenkins" ], 
+      Group[ "docker" ]
+    ]
+  }
+
+  file { "/usr/local/bin/docker":
+    ensure  => "file",
+    mode    => "0777",
+    source  => "/vagrant/files/docker"
+  }
+  
+  group { "docker":
+    ensure  => "present"
+  }
+  
+  exec { "/usr/local/bin/docker -d &":
+    unless  => "/bin/ps -ax |/bin/grep docker |/bin/grep -v grep"
+  }
+
+  file { "/home/vagrant/Dockerfile":
+    ensure  => "file",
+    source  => "/vagrant/files/Dockerfile",
+    notify  => Exec[ "/usr/local/bin/docker build -t mepc/app:base ." ]
+  }
+
+  exec { "/usr/local/bin/docker build -t mepc/app:base .":
+    cwd         => "/home/vagrant",
+    refreshonly => true
   }
 
   $waitForJenkins = ""
