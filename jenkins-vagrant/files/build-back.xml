@@ -31,6 +31,7 @@
     <artifactId>mepc</artifactId>
   </rootModule>
   <rootPOM>server/pom.xml</rootPOM>
+  <goals>clean install</goals>
   <aggregatorStyleBuild>true</aggregatorStyleBuild>
   <incrementalBuild>false</incrementalBuild>
   <ignoreUpstremChanges>false</ignoreUpstremChanges>
@@ -45,7 +46,7 @@
   <reporters/>
   <publishers>
     <hudson.tasks.ArtifactArchiver>
-      <artifacts>server/target/*.jar</artifacts>
+      <artifacts>server/target/mepc-*-server.jar</artifacts>
       <latestOnly>false</latestOnly>
       <allowEmptyArchive>false</allowEmptyArchive>
     </hudson.tasks.ArtifactArchiver>
