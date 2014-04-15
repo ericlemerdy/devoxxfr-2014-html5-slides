@@ -12,3 +12,9 @@ That project is a fork of the [gpaul](http://gpaul.me) HTML5 slides for Devoxx F
     ```
 
     Visit : [http://10.10.10.2:8080/](http://10.10.10.2:8080/)
+
+- For better re-provisionning performance :
+
+    ```
+    vagrant plugin install vagrant-cachier
+    ```
