@@ -8,7 +8,6 @@ RUN mkdir -p /var/run/sshd && \
     rm -rf /usr/share/nginx/html
 RUN sed -i 's/PermitRootLogin without-password/PermitRootLogin yes/' /etc/ssh/sshd_config
 RUN sed -i '$ a UseDNS no' /etc/ssh/sshd_config
-RUN echo root:mepcRul3Z |chpasswd
 ADD start.sh /root/start.sh
 
 EXPOSE 80
