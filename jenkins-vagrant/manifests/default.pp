@@ -45,4 +45,5 @@ jenkins::plugin { "parameterized-trigger": plugin => "parameterized-trigger.jpi"
 jenkins::plugin { "build-pipeline-plugin": plugin => "build-pipeline-plugin.jpi" }
 jenkins::plugin { "claim":                 plugin => "claim.hpi"                 }
 jenkins::plugin { "z-mon":                 plugin => "z-mon.hpi"                 }
+jenkins::plugin { "copy-artifact":         plugin => "copyartifact.hpi"          }
 
