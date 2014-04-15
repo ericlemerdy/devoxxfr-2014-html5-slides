@@ -133,6 +133,8 @@
 			<plugin>
 				<artifactId>maven-assembly-plugin</artifactId>
 				<configuration>
+		          <appendAssemblyId>false</appendAssemblyId>
+		          <finalName>mepc-${project.version}-server</finalName>
 					<archive>
 						<manifest>
 							<mainClass>net.mepc.MepcLauncher</mainClass>
