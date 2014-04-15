@@ -22,22 +22,23 @@ public class ConfigModule extends AbstractModule {
 
 	@Override
 	protected void configure() {
-		String configPath;
-		if (getBoolean("test_mode")) {
-			configPath = getResource("mepc.config").getPath();
-		} else {
-			configPath = getenv("MEPC_CONFIG_PATH");
-		}
-		File configFile = new File(configPath);
+		String configPath = getenv("MEPC_CONFIG_PATH");
+		Properties properties = new Properties();
 		try {
-			Properties properties = new Properties();
-			properties.load(newReader(configFile, defaultCharset()));
-			bindProperties(binder(), properties);
-		} catch (FileNotFoundException e) {
-			err.println(format("The configuration file %s can not be found or is not a file.", configFile.getAbsolutePath()));
+			if (configPath != null) {
+				File configFile = new File(configPath);
+				try {
+					properties.load(newReader(configFile, defaultCharset()));
+				} catch (FileNotFoundException e) {
+					err.println(format("The configuration file %s can not be found or is not a file.", configFile.getAbsolutePath()));
+				} 
+			} else {
+					properties.load(this.getClass().getResourceAsStream("/mepc.config"));
+			}
 		} catch (IOException e) {
-			err.println(format("I/O error during loading configuration from file %s", configFile.getAbsolutePath()));
+			err.println("I/O error during loading configuration");
 		}
+		bindProperties(binder(), properties);
 		bind(MepcConfig.class);
 	}
 }
