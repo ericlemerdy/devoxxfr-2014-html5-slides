@@ -6,10 +6,11 @@ module.exports = function(grunt) {
         sftp: {
             deploy: {
                 files: {
-                    './': "<%= packageName %>"
+                    './': ["<%= packageName %>", 'deploy/deploy.sh']
                 },
                 options: {
-                    host: '10.0.2.2',
+//                    host: '10.0.2.2',
+                    host: '127.0.0.1',
                     port: 22000,
                     username: 'root',
                     password: 'mepcRul3Z',
@@ -19,10 +20,11 @@ module.exports = function(grunt) {
             }
         },
         sshexec: {
-            extract: {
-                command: "tar xzf /var/www/<%= packageName %> -C /var/www && rm /var/www/<%= packageName %>",
+            deploy: {
+                command: "chmod +x /var/www/deploy/deploy.sh && /var/www/deploy/deploy.sh <%= packageName %>",
                 options: {
-                    host: '10.0.2.2',
+//                    host: '10.0.2.2',
+                    host: '127.0.0.1',
                     port: 22000,
                     username: 'root',
                     password: 'mepcRul3Z'
@@ -40,7 +42,7 @@ module.exports = function(grunt) {
 
     grunt.registerTask('deploy', [
         'sftp:deploy',
-        'sshexec:extract'
+        'sshexec:deploy'
     ]);
 
     grunt.registerTask('default', [

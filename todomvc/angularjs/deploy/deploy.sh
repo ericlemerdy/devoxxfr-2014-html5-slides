@@ -12,10 +12,12 @@ fi
 TARGET_DIR=/var/www/${TARGET_ENV}
 if [ -d ${TARGET_DIR} ]; then
   rm -rf ${TARGET_DIR}
-  mkdir ${TARGET_DIR}
 fi
+mkdir ${TARGET_DIR}
+echo "Target dir created : ${TARGET_DIR}"
 
-tar xzf /var/www/${PACKAGE_NAME} -C ${TARGET_DIR}
+cd ${TARGET_DIR}
+tar xzf /var/www/${PACKAGE_NAME}
 rm -f /var/www/${PACKAGE_NAME}
 
-ln -sf ${TARGET_DIR} ${DOC_LINK}
+rm -f ${DOC_LINK} && ln -sf ${TARGET_DIR} ${DOC_LINK}
