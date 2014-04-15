@@ -47,7 +47,7 @@
     </au.com.centrumsystems.hudson.plugin.buildpipeline.BuildPipelineView>
     <au.com.centrumsystems.hudson.plugin.buildpipeline.BuildPipelineView plugin="build-pipeline-plugin@1.4.2">
       <owner class="hudson" reference="../../.."/>
-      <name>Step2 - backend</name>
+      <name>Step 2 - back</name>
       <filterExecutors>false</filterExecutors>
       <filterQueue>false</filterQueue>
       <properties class="hudson.model.View$PropertyList"/>
