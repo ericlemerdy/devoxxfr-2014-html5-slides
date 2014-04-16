@@ -1,0 +1,53 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<project>
+  <actions/>
+  <description></description>
+  <keepDependencies>false</keepDependencies>
+  <properties/>
+  <scm class="hudson.scm.NullSCM"/>
+  <canRoam>true</canRoam>
+  <disabled>false</disabled>
+  <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
+  <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+  <triggers/>
+  <concurrentBuild>false</concurrentBuild>
+  <builders>
+    <hudson.tasks.Shell>
+      <command>rm -rf *</command>
+    </hudson.tasks.Shell>
+    <hudson.plugins.copyartifact.CopyArtifact plugin="copyartifact@1.30">
+      <project>build-back</project>
+      <filter>mepc_app-*.tar</filter>
+      <target></target>
+      <selector class="hudson.plugins.copyartifact.StatusBuildSelector"/>
+      <doNotFingerprintArtifacts>false</doNotFingerprintArtifacts>
+    </hudson.plugins.copyartifact.CopyArtifact>
+    <hudson.tasks.Shell>
+      <command>#!/bin/sh
+
+RELEASE_VERSION=`ls mepc_app-*.tar |cut -c10- |sed &apos;s/\.tar//&apos;`
+DEPLOYED=`curl &quot;http://10.0.2.2:4243/containers/json?all=1&quot; |grep -E &apos;app-(blue|green)&apos;`
+IS_BLUE=`curl &quot;http://10.0.2.2:4243/containers/json?all=1&quot; |grep &apos;app-blue&apos;`
+
+if [ &quot;_${DEPLOYED}&quot; = &quot;_1&quot; ]; then
+  TARGET_ENV=blue
+else
+  if [ &quot;_${IS_BLUE}&quot; = &quot;_1&quot; ]; then
+    TARGET_ENV=blue
+  else
+    TARGET_ENV=green
+  fi
+fi
+
+curl --data-binary @mepc_app-${RELEASE_VERSION}.tar -H &apos;Transfer-encoding: chunked&apos; -H &apos;Content-type: plain/text&apos; &quot;http://10.0.2.2:4243/images/load&quot;
+
+curl -X DELETE &quot;http://10.0.2.2:4243/containers/app-${TARGET_ENV}?force=1&quot;
+curl --data-binary &quot;{\&quot;Image\&quot;:\&quot;mepc/app:${RELEASE_VERSION}\&quot;,\&quot;ExposedPorts\&quot;:{\&quot;8080/tcp\&quot;:{}}, \&quot;Cmd\&quot;: [\&quot;/usr/bin/java\&quot;, \&quot;-jar\&quot;, \&quot;/opt/mepc-server.jar\&quot;]}&quot; -H &apos;Content-Type: application/json&apos; &quot;http://10.0.2.2:4243/containers/create?name=app-${TARGET_ENV}&quot;
+
+curl --data-binary &apos;{ &quot;Links&quot;: [ &quot;db:db&quot; ] }&apos; -H &apos;Content-Type: application/json&apos; &quot;http://10.0.2.2:4243/containers/app-${TARGET_ENV}/start&quot;
+</command>
+    </hudson.tasks.Shell>
+  </builders>
+  <publishers/>
+  <buildWrappers/>
+</project>

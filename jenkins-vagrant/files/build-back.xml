@@ -54,10 +54,22 @@
       <latestOnly>false</latestOnly>
       <allowEmptyArchive>false</allowEmptyArchive>
     </hudson.tasks.ArtifactArchiver>
+    <hudson.tasks.BuildTrigger>
+      <childProjects>deploy-back</childProjects>
+      <threshold>
+        <name>SUCCESS</name>
+        <ordinal>0</ordinal>
+        <color>BLUE</color>
+        <completeBuild>true</completeBuild>
+      </threshold>
+    </hudson.tasks.BuildTrigger>
   </publishers>
   <buildWrappers/>
   <prebuilders/>
   <postbuilders>
+    <hudson.tasks.Shell>
+      <command>rm -rf mepc_app-*.tar</command>
+    </hudson.tasks.Shell>
     <hudson.tasks.Shell>
       <command>cd server
 RELEASE_VERSION=`grep -m1 version pom.xml |sed &apos;s/.*&lt;version&gt;\([0-9\.]*\).*/\1/&apos;`
@@ -66,7 +78,7 @@ cp target/mepc-${RELEASE_VERSION}-server.jar mepc-server.jar
 whoami
 groups
 docker build -t mepc/app:${RELEASE_VERSION} .
-docker save -o ../mepc_app-${RELEASE_VERSION}.tar mepc/app:${RELEASE_VERSION}
+docker save -o ../mepc_app-${RELEASE_VERSION}.tar mepc/app
 </command>
     </hudson.tasks.Shell>
     <hudson.tasks.Shell>
