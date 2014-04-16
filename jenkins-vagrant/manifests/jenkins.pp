@@ -50,8 +50,16 @@ class jenkins {
   group { "docker":
     ensure  => "present"
   }
+
+  package { "aufs-tools":
+    ensure => "installed"
+  }
+
+  package {"lxc":
+    ensure => installed
+  }
   
-  exec { "/usr/local/bin/docker -d &":
+  exec { "/usr/local/bin/docker -d -e lxc &":
     unless  => "/bin/ps -ax |/bin/grep docker |/bin/grep -v grep"
   }
 

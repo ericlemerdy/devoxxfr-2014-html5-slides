@@ -37,6 +37,25 @@ package { "g++":
   require => Jenkins::Job [ "test-front" ]
 }
 
+package { "curl":
+  ensure => "installed"
+}
+
+package { "linux-image-generic-lts-raring":
+  ensure => "installed",
+  require => Exec [ "apt-get update" ]
+}
+
+package { "linux-headers-generic-lts-raring":
+  ensure => "installed",
+  require => Exec [ "apt-get update" ]
+}
+
+package { "virtualbox-guest-utils":
+  ensure  => "installed",
+  require => Package[ "linux-headers-generic-lts-raring" ]
+}
+
 jenkins::plugin { "scm-api":               plugin => "scm-api.hpi"               }
 jenkins::plugin { "git-client":            plugin => "git-client.hpi"            }
 jenkins::plugin { "git":                   plugin => "git.hpi"                   }
