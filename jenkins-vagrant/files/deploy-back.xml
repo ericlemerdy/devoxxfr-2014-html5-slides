@@ -26,8 +26,11 @@
       <command>#!/bin/sh
 
 RELEASE_VERSION=`ls mepc_app-*.tar |cut -c10- |sed &apos;s/\.tar//&apos;`
-DEPLOYED=`curl &quot;http://10.0.2.2:4243/containers/json?all=1&quot; |grep -E &apos;app-(blue|green)&apos;`
-IS_BLUE=`curl &quot;http://10.0.2.2:4243/containers/json?all=1&quot; |grep &apos;app-blue&apos;`
+curl &quot;http://10.0.2.2:4243/containers/json?all=1&quot; |grep -E &apos;app-(blue|green)&apos;
+DEPLOYED=$?
+
+curl &quot;http://10.0.2.2:4243/containers/json?all=1&quot; |grep &apos;app-blue&apos;
+IS_BLUE=$?
 
 if [ &quot;_${DEPLOYED}&quot; = &quot;_1&quot; ]; then
   TARGET_ENV=blue
@@ -55,6 +58,15 @@ echo ${TARGET_ENV} &gt; target-env</command>
       <latestOnly>false</latestOnly>
       <allowEmptyArchive>false</allowEmptyArchive>
     </hudson.tasks.ArtifactArchiver>
+    <hudson.tasks.BuildTrigger>
+      <childProjects>switch-env-back</childProjects>
+      <threshold>
+        <name>SUCCESS</name>
+        <ordinal>0</ordinal>
+        <color>BLUE</color>
+        <completeBuild>true</completeBuild>
+      </threshold>
+    </hudson.tasks.BuildTrigger>
   </publishers>
   <buildWrappers/>
 </project>
