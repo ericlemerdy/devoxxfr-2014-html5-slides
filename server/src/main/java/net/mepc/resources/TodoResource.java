@@ -13,6 +13,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.ResponseBuilder;
 
+import com.mongodb.MongoException;
 import org.bson.types.ObjectId;
 import org.jongo.MongoCollection;
 
@@ -51,14 +52,13 @@ public class TodoResource extends AbstractResource {
 		return response.build();
 	}
 	
-	@PUT
 	@Consumes(APPLICATION_JSON)
 	public Response create(Todo todo) {
 		ObjectId id = (ObjectId) mongoCollection.insert(todo).getUpsertedId();
 		return ok(id.toHexString()).build();
 	}
 	
-	@POST
+	@PUT
 	@Consumes(APPLICATION_JSON)
 	public Response update(Todo todo) {
 		mongoCollection.save(todo);

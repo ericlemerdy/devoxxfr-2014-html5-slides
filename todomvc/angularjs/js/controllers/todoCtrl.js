@@ -9,7 +9,14 @@ angular.module('todomvc')
 	.controller('TodoCtrl', function TodoCtrl($scope, $routeParams, $filter, $http, todoStorage) {
 		'use strict';
 
-		var todos = $scope.todos = todoStorage.get();
+		var todos = [];
+		todoStorage.get()
+			.success(function (data) {
+				todos = $scope.todos = data || [];
+		    })
+			.error(function () {
+				todos = $scope.todos = [];
+		    });
 
 		$scope.newTodo = '';
 		$scope.editedTodo = null;
@@ -19,7 +26,9 @@ angular.module('todomvc')
 			$scope.completedCount = todos.length - $scope.remainingCount;
 			$scope.allChecked = !$scope.remainingCount;
 			if (newValue !== oldValue) { // This prevents unneeded calls to the local storage
-				todoStorage.put(todos);
+				todos.forEach(function (todo) {
+					todoStorage.put(todo);
+				});
 			}
 		}, true);
 

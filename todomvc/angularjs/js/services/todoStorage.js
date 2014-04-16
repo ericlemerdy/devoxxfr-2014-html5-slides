@@ -1,21 +1,20 @@
 /*global angular */
 
 /**
- * Services that persists and retrieves TODOs from localStorage
+ * Services that persists and retrieves TODOs from database
  */
 angular.module('todomvc')
-	.factory('todoStorage', function () {
+	.factory('todoStorage', function ($http) {
 		'use strict';
-
-		var STORAGE_ID = 'todos-angularjs';
 
 		return {
 			get: function () {
-				return JSON.parse(localStorage.getItem(STORAGE_ID) || '[]');
+				return $http.get('http://localhost:8080/');
 			},
 
-			put: function (todos) {
-				localStorage.setItem(STORAGE_ID, JSON.stringify(todos));
+			put: function (todo) {
+				console.log(todo);
+				return $http.put('http://localhost:8080/', todo);
 			}
 		};
 	});
