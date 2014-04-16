@@ -45,9 +45,16 @@ curl -X DELETE &quot;http://10.0.2.2:4243/containers/app-${TARGET_ENV}?force=1&q
 curl --data-binary &quot;{\&quot;Image\&quot;:\&quot;mepc/app:${RELEASE_VERSION}\&quot;,\&quot;ExposedPorts\&quot;:{\&quot;8080/tcp\&quot;:{}}, \&quot;Cmd\&quot;: [\&quot;/usr/bin/java\&quot;, \&quot;-jar\&quot;, \&quot;/opt/mepc-server.jar\&quot;]}&quot; -H &apos;Content-Type: application/json&apos; &quot;http://10.0.2.2:4243/containers/create?name=app-${TARGET_ENV}&quot;
 
 curl --data-binary &apos;{ &quot;Links&quot;: [ &quot;db:db&quot; ] }&apos; -H &apos;Content-Type: application/json&apos; &quot;http://10.0.2.2:4243/containers/app-${TARGET_ENV}/start&quot;
-</command>
+
+echo ${TARGET_ENV} &gt; target-env</command>
     </hudson.tasks.Shell>
   </builders>
-  <publishers/>
+  <publishers>
+    <hudson.tasks.ArtifactArchiver>
+      <artifacts>target-env</artifacts>
+      <latestOnly>false</latestOnly>
+      <allowEmptyArchive>false</allowEmptyArchive>
+    </hudson.tasks.ArtifactArchiver>
+  </publishers>
   <buildWrappers/>
 </project>

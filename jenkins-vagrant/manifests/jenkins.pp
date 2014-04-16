@@ -55,6 +55,10 @@ class jenkins {
     ensure => "installed"
   }
 
+  package {"redis-server":
+    ensure => installed
+  }
+
   package {"lxc":
     ensure => installed
   }
