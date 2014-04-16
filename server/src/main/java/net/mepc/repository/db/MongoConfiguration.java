@@ -1,12 +1,14 @@
 package net.mepc.repository.db;
 
+import static com.google.common.base.Objects.firstNonNull;
 import static java.text.MessageFormat.format;
 
+import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import com.mongodb.MongoClientURI;
 
 public class MongoConfiguration {
-	private static MongoConfiguration configuration = new MongoConfiguration();
+	private static MongoConfiguration configuration = new MongoConfiguration(new SystemEnvironmentProvider());
 
 	private long port = 27017l;
 
@@ -14,9 +16,13 @@ public class MongoConfiguration {
 
 	private String db;
 
-	@Inject
-	private MongoConfiguration() {
-	}
+    private SystemEnvironmentProvider systemEnvironmentProvider;
+
+    @Inject
+    protected MongoConfiguration(SystemEnvironmentProvider systemEnvironmentProvider) {
+        this.systemEnvironmentProvider = systemEnvironmentProvider;
+        this.address = firstNonNull(systemEnvironmentProvider.get("DB_PORT_27017_TCP_ADDR"), "127.0.0.1");
+    }
 
 	public static MongoConfiguration createConfiguration() {
 		return configuration;
