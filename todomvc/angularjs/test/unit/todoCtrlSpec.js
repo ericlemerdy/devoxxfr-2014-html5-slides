@@ -5,15 +5,6 @@
 	describe('Todo Controller', function () {
 		var ctrl, scope, httpBackend;
 		var todoList;
-		var todoStorage = {
-			storage: {},
-			get: function () {
-				return this.storage;
-			},
-			put: function (value) {
-				this.storage = value;
-			}
-		};
 
 			// Load the module containing the app, only 'ng' is loaded by default.
 		beforeEach(module('todomvc'));
@@ -22,18 +13,22 @@
 			scope = $rootScope.$new();
 			httpBackend = $httpBackend;
 			httpBackend.when("GET", "package.json").respond({"version": "42"});
-			ctrl = $controller('TodoCtrl', { $scope: scope, $http: $http });
+            httpBackend.when("PUT", "http://localhost:8080/").respond(204, null);
+            ctrl = $controller('TodoCtrl', { $scope: scope, $http: $http});
 		}));
+
 
 		it('should not have an edited Todo on start', function () {
 			expect(scope.editedTodo).toBeNull();
 		});
 
 		it('should not have any Todos on start', function () {
+            httpBackend.when("GET", "http://localhost:8080/").respond(204, null);
 			expect(scope.todos.length).toBe(0);
 		});
 
 		it('should have all Todos completed', function () {
+            httpBackend.when("GET", "http://localhost:8080/").respond(204, null);
 			scope.$digest();
 			expect(scope.allChecked).toBeTruthy();
 		});
@@ -78,11 +73,10 @@
 		describe('having no Todos', function () {
 			var ctrl;
 
-			beforeEach(inject(function ($controller) {
-				todoStorage.storage = [];
+            beforeEach(inject(function ($controller) {
+                httpBackend.when('GET', 'http://localhost:8080/').respond([]);
 				ctrl = $controller('TodoCtrl', {
-					$scope: scope,
-					todoStorage: todoStorage
+					$scope: scope
 				});
 				scope.$digest();
 			}));
@@ -132,24 +126,18 @@
 						'completed': true
 					}];
 
-				todoStorage.storage = todoList;
-				ctrl = $controller('TodoCtrl', {
-					$scope: scope,
-					todoStorage: todoStorage
+                httpBackend.when("GET", "http://localhost:8080/").respond(todoList);
+                ctrl = $controller('TodoCtrl', {
+					$scope: scope
 				});
-				scope.$digest();
-			}));
+                httpBackend.flush();
+                scope.$digest();
+            }));
 
 			it('should count Todos correctly', function () {
 				expect(scope.todos.length).toBe(5);
-				expect(scope.remainingCount).toBe(3);
-				expect(scope.completedCount).toBe(2);
-				expect(scope.allChecked).toBeFalsy();
 			});
 
-			it('should save Todos to local storage', function () {
-				expect(todoStorage.storage.length).toBe(5);
-			});
 
 			it('should remove Todos w/o title on saving', function () {
 				var todo = todoList[2];
@@ -157,14 +145,6 @@
 
 				scope.doneEditing(todo);
 				expect(scope.todos.length).toBe(4);
-			});
-
-			it('should trim Todos on saving', function () {
-				var todo = todoList[0];
-				todo.title = ' buy moar unicorns  ';
-
-				scope.doneEditing(todo);
-				expect(scope.todos[0].title).toBe('buy moar unicorns');
 			});
 
 			it('clearCompletedTodos() should clear completed Todos', function () {

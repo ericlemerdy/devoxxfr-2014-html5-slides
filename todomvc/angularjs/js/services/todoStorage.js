@@ -13,7 +13,6 @@ angular.module('todomvc')
 			},
 
 			put: function (todo) {
-				console.log(todo);
 				return $http.put('http://localhost:8080/', todo);
 			}
 		};

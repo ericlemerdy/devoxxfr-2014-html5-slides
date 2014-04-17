@@ -9,7 +9,7 @@ angular.module('todomvc')
 	.controller('TodoCtrl', function TodoCtrl($scope, $routeParams, $filter, $http, todoStorage) {
 		'use strict';
 
-		var todos = [];
+		var todos = $scope.todos = [];
 		todoStorage.get()
 			.success(function (data) {
 				todos = $scope.todos = data || [];
@@ -64,7 +64,6 @@ angular.module('todomvc')
 		$scope.doneEditing = function (todo) {
 			$scope.editedTodo = null;
 			todo.title = todo.title.trim();
-
 			if (!todo.title) {
 				$scope.removeTodo(todo);
 			}
