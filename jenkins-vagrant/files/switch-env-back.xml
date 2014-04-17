@@ -21,8 +21,8 @@
     </hudson.plugins.copyartifact.CopyArtifact>
     <hudson.tasks.Shell>
       <command>TARGET_ENV=`cat target-env`
-redis-cli -h 10.0.2.2 linsert frontend:appserver AFTER app http://`curl http://10.0.2.2:4243/containers/app-${TARGET_ENV}/json |sed &apos;s/.*IPAddress&quot;:&quot;\([0-9\.]*\).*/\1/&apos;`:8080
-redis-cli -h 10.0.2.2 ltrim frontend:appserver 0 1</command>
+redis-cli -h 10.0.2.2 linsert frontend:mepc.io AFTER app http://`curl http://10.0.2.2:4243/containers/app-${TARGET_ENV}/json |sed &apos;s/.*IPAddress&quot;:&quot;\([0-9\.]*\).*/\1/&apos;`:8080
+redis-cli -h 10.0.2.2 ltrim frontend:mepc.io 0 1</command>
     </hudson.tasks.Shell>
   </builders>
   <publishers/>
