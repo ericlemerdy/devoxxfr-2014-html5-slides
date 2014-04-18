@@ -21,12 +21,7 @@
     </hudson.plugins.copyartifact.CopyArtifact>
     <hudson.tasks.Shell>
       <command>TARGET_ENV=`cat target-env`
-if [ "$TARGET_ENV" = "blue" ]; then
-  TARGET_PORT=8081
-else
-  TARGET_PORT=8082
-fi
-redis-cli -h 10.0.2.2 linsert frontend:192.168.1.1 AFTER app http://`curl http://10.0.2.2:4243/containers/app-${TARGET_ENV}/json |sed &apos;s/.*IPAddress&quot;:&quot;\([0-9\.]*\).*/\1/&apos;`:${TARGET_PORT}
+redis-cli -h 10.0.2.2 linsert frontend:192.168.1.1 AFTER app http://`curl http://10.0.2.2:4243/containers/app-${TARGET_ENV}/json |sed &apos;s/.*IPAddress&quot;:&quot;\([0-9\.]*\).*/\1/&apos;`:8080
 redis-cli -h 10.0.2.2 ltrim frontend:192.168.1.1 0 1</command>
     </hudson.tasks.Shell>
   </builders>
