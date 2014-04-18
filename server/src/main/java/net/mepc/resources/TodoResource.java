@@ -4,12 +4,7 @@ import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
 import static javax.ws.rs.core.Response.noContent;
 import static javax.ws.rs.core.Response.ok;
 
-import javax.ws.rs.Consumes;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.PUT;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.ResponseBuilder;
 
@@ -59,15 +54,20 @@ public class TodoResource extends AbstractResource {
 		ObjectId id = (ObjectId) mongoCollection.insert(todo).getUpsertedId();
 		return ok(id.toHexString()).build();
 	}
-	
-	@PUT
-	@Consumes(APPLICATION_JSON)
-	public Response update(Todo todo) {
-		System.out.println(todo);
-		if (todo.get_id() != null && todo.get_id().length() == 0) {
-			todo.set_id(null);
-		}
-		mongoCollection.withWriteConcern(WriteConcern.JOURNALED).save(todo);
-		return ok(todo.get_id()).build();
-	}
+
+    @PUT
+    @Consumes(APPLICATION_JSON)
+    public Response update(Todo todo) {
+        System.out.println(todo);
+        if (todo.get_id() != null && todo.get_id().length() == 0) {
+            todo.set_id(null);
+        }
+        mongoCollection.withWriteConcern(WriteConcern.JOURNALED).save(todo);
+        return ok(todo.get_id()).build();
+    }
+
+    @OPTIONS
+    public Response options() {
+        return ok().build();
+    }
 }
