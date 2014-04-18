@@ -25,7 +25,14 @@ file { "/var/lib/jenkins/config.xml":
 jenkins::job { "test-front":   name => "test-front"   }
 jenkins::job { "build-front":  name => "build-front"  }
 jenkins::job { "deploy-front": name => "deploy-front" }
-jenkins::job { "build-back":   name => "build-back"   }
+
+jenkins::job { "build-back":      name => "build-back"      }
+jenkins::job { "deploy-back":     name => "deploy-back"     }
+jenkins::job { "switch-env-back": name => "switch-env-back" }
+
+jenkins::job { "test-front-2":   name => "test-front-2"   }
+jenkins::job { "build-front-2":  name => "build-front-2"  }
+jenkins::job { "deploy-front-2": name => "deploy-front-2" }
 
 package { "make":
   ensure  => "installed",
