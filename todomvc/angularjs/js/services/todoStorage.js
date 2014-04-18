@@ -9,11 +9,11 @@ angular.module('todomvc')
 
 		return {
 			get: function () {
-				return $http.get('http://localhost:8080/');
+				return $http.get('http://mepc.io:8080/');
 			},
 
 			put: function (todo) {
-				return $http.put('http://localhost:8080/', todo);
+				return $http.put('http://mepc.io:8080/', todo);
 			}
 		};
 	});
