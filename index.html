@@ -114,26 +114,19 @@
             </div>
             <div>Allumez vos téléphones sur le wifi <strong>MEPC</strong></div>
             <div>Votre mission est de vérifier qu'on va déployer en continu.</div>
-            <p>
-                <h2>http://change.me/todo</h2>
-            </p>
-        </div>
-    </section>
-    <section class="slide">
-        <div>
-            <img style="width: 820px;" src="pictures/archi.jpg"><br>
         </div>
     </section>
     <section class="slide cover title">
         <div>
             <div class="color1"></div><div class="color2"></div><div class="color3"></div>
-            <h1>Étape 0 : rien</h1>
+            <h1>Étape 0 : achetons le nom de domaine</h1>
             <img src="pictures/cover.jpg" alt="">
             <p class="footer"><a class="hashtag" href="https://twitter.com/search?q=%23deboxxbtc">#devoxx</a><span class="twitter"><img src="pictures/twitter.png"><a href="https://twitter.com/your_twitter" rel="me" class="twitter">@your_twitter</a></span></p>
         </div>
     </section>
     <section class="slide">
         <div>
+            <h2>http://change.me/todo</h2>
             <img src="pictures/nothing.png" style="width: 280px;"/>
         </div>
     </section>
@@ -147,50 +140,85 @@
     </section>
     <section class="slide">
         <div>
+            <img style="width: 820px;" src="pictures/archi-web.jpg"><br>
+        </div>
+    </section>
+    <section class="slide">
+        <div>
             <h2>Gentlemen, start your engines</h2>
             <ul>
                 <li>
-                    Construit et taggue une image Docker (un conteneur web ngnix)<br>
-                    <blockquote>build_front.sh :</blockquote>
-                    <code>cd front</code><br>
-                    <code>docker build --rm -t mepc/front:1 .</code>
+                    Construit et taggue une image Docker (un conteneur web ngnix)<br/>
+                    <div style="padding-left: 5em;">
+                        <em>build_front.sh :</em><br/>
+                        <code>cd front</code><br/>
+                        <code>docker build --rm -t mepc/front:1 .</code>
+                    </div>
                 <li>
                     Lance une instance :<br>
-                    <blockquote>run_front.sh :</blockquote>
-                    <code>docker run -d -t -p 2222:22 -p 8080:80 --name front mepc/front</code><br>
+                    <div style="padding-left: 5em;">
+                        <em>run_front.sh :</em><br/>
+                        <code>docker run -d -t -p 2222:22 -p 8080:80 --name front mepc/front</code><br>
+                    </div>
             </ul>
         </div>
     </section>
     <section class="slide">
         <div>
-            <h2>Ça marche ?</h2>
-            <div>Non parce qu'on a rien mis dans le serveur</div>
-        </div>
-    </section>
-    <section class="slide">
-        <div>
             <h2>Gentlemen, ... deploy ?!? your engines ?</h2>
-            <div>
-                Dans le front :<br>
-                <code>npm install</code><br>
-                <code>grunt package deploy</code>
-            </div>
+            <ul>
+                <li>
+                    Dans le front :<br/>
+                    <div style="padding-left: 5em;">
+                        <code>npm install</code><br/>
+                        <code style="margin-left: -3em;">grunt package</code><br/>
+                        <code style="margin-left: -3em;">grunt deploy</code>
+                    </div>
+                </li>
+            </ul>
         </div>
     </section>
-    <section class="slide">
+    <section class="slide cover title">
         <div>
-            <h2>Et maintenant, ça marche ?</h2>
+            <div class="color1"></div><div class="color2"></div><div class="color3"></div>
+            <h1>Étape 2 : re-déployons</h1>
+            <img src="pictures/cover.jpg" alt="">
+            <p class="footer"><a class="hashtag" href="https://twitter.com/search?q=%23deboxxbtc">#devoxx</a><span class="twitter"><img src="pictures/twitter.png"><a href="https://twitter.com/your_twitter" rel="me" class="twitter">@your_twitter</a></span></p>
         </div>
     </section>
     <section class="slide">
         <div>
             <h2>Encore, encore !!</h2>
-            <div>
-                Rien de plus simple :<br>
-                <code>grunt package deploy</code>
-            </div>
-            <img src="pictures/tada_by_13vampirella-d6skye5.jpg" style="width: 335px"/><br>
+            <ul>
+                <li>
+                    Rien de plus simple :<br>
+                    <div style="padding-left: 5em;">
+                        <code>grunt package</code><br/>
+                        <code style="margin-left: -3em;">grunt deploy</code>
+                    </div>
+            </ul>
+            <img src="pictures/tada_by_13vampirella-d6skye5.jpg" style="margin-top: -1em; width: 335px"/>
             <small><a href="http://fav.me/d6skye5">réf. photo</a></small>
+        </div>
+    </section>
+    <section class="slide">
+        <div>
+            <h2>Toute chose échoue !</h2>
+            <ul>
+                <li>
+                    Rien ne nous protège d'une régression
+                    <div style="padding-left: 5em;">
+                        <code>mv index.html foobar.html</code><br/>
+                        <code style="margin-left: -3em;">grunt package</code><br/>
+                        <code style="margin-left: -3em;">grunt deploy</code>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </section>
+    <section class="slide">
+        <div>
+            <img style="width: 820px;" src="pictures/archi-ci.jpg"><br>
         </div>
     </section>
     <section class="slide">
@@ -200,17 +228,31 @@
             <small><a href="http://bit.ly/1i7pYvf">réf. photo</a></small>
         </div>
     </section>
+    <section class="slide cover title">
+        <div>
+            <div class="color1"></div><div class="color2"></div><div class="color3"></div>
+            <h1>Étape 3 : déployons un backend !</h1>
+            <img src="pictures/cover.jpg" alt="">
+            <p class="footer"><a class="hashtag" href="https://twitter.com/search?q=%23deboxxbtc">#devoxx</a><span class="twitter"><img src="pictures/twitter.png"><a href="https://twitter.com/your_twitter" rel="me" class="twitter">@your_twitter</a></span></p>
+        </div>
+    </section>
     <section class="slide">
         <div>
-            <h2>Déployons un backend !</h2>
+            <img style="width: 820px;" src="pictures/archi.jpg"><br>
+        </div>
+    </section>
+    <section class="slide">
+        <div>
+            <!--<h2>Déployons un backend !</h2>-->
             <div style="float: right">
-                <img src="pictures/ENIAC.jpg" style="height: 200px"><br/>
-                <small style="float: right"><a href="http://bit.ly/1iAoExs">réf. photo</a></small>
+                <img src="pictures/ENIAC.jpg" style="height: 200px">
+                <small><a href="http://bit.ly/1iAoExs">réf. photo</a></small>
             </div>
             <ul style="margin-top: 175px">
                 <li>
                     load balancer : <br/>
-                    <code>docker run -d -p 8080:80 --name rp hipache</code>
+                    <code>docker run -d -p 6379:6379 -p 8080:80 --name rp hipache</code><br/>
+                    <code>redis-cli -h 10.0.2.2 rpush frontend:mepc.io app</code>
                 </li>
                 <li>
                     mongodb :<br/>
@@ -219,7 +261,7 @@
                 <li>
                     appli : <br/>
                     <code>docker run -d --expose 8080 --name app-blue mepc/app:1.0</code><br/>
-                    <strong> => WAT ?</strong>
+                    <strong> &#8658; WAT ?</strong>
                 </li>
             </ul>
         </div>
@@ -243,16 +285,16 @@
             </code>
             <h3>1 image docker = 1 déploiement</h3>
             <code style="font-size: xx-small">
-                curl --data-binary @mepc_app-1.0.tar -H 'Content-type: application/tar' http://10.0.2.2:4243/images/create?fromSrc=-&repo=mepc/app&tag=1.0
+                curl --data-binary @mepc_app-1.0.tar -H 'Transfer-encoding: chunked' -H 'Content-type: plain/text' "http://10.0.2.2:4243/images/load"
             </code><br/>
             <code style="font-size: xx-small">
-                    curl --data-binary '{"Image":"mepc/app:1.0","ExposedPorts":{"8080/tcp":{}}}' -H 'Content-Type: application/json' \
+                    curl --data-binary '{"Image":"mepc/app:1.0","ExposedPorts":{"8080/tcp":{}}, "Cmd": ["/usr/bin/java", "-jar", "/opt/mepc-server.jar"]}' -H 'Content-Type: application/json' \
             </code><br/>
             <code style="font-size: xx-small;margin-top: -1em;display: block;width: 30em;">
                     'http://10.0.2.2:4243/containers/create?name=app-blue'
             </code><br/>
             <code style="font-size: xx-small;display: block;margin-top: -2em;">
-                curl --data-binary '{ "Links": [ "db:db" ] }' -H 'Content-Type: application/json' 'http://127.0.0.1:4243/containers/app-blue/start'
+                curl --data-binary '{ "Links": [ "db:db" ] }' -H 'Content-Type: application/json' 'http://10.0.2.2:4243/containers/app-blue/start'
             </code>
         </div>
     </section>
