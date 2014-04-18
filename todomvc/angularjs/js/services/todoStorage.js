@@ -13,7 +13,10 @@ angular.module('todomvc')
 			},
 
 			put: function (todo) {
-				return $http.put('http://mepc.io:8080/', todo);
+				console.log(todo);
+				return $http.put('http://mepc.io:8080/', todo).success(function(data) {
+					todo._id = data;
+				});
 			}
 		};
 	});

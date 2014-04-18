@@ -16,13 +16,13 @@ public class MongoConfiguration {
 
 	private String db;
 
-    private SystemEnvironmentProvider systemEnvironmentProvider;
+	private SystemEnvironmentProvider systemEnvironmentProvider;
 
-    @Inject
-    protected MongoConfiguration(SystemEnvironmentProvider systemEnvironmentProvider) {
-        this.systemEnvironmentProvider = systemEnvironmentProvider;
-        this.address = firstNonNull(systemEnvironmentProvider.get("DB_PORT_27017_TCP_ADDR"), "127.0.0.1");
-    }
+	@Inject
+	protected MongoConfiguration(SystemEnvironmentProvider systemEnvironmentProvider) {
+		this.systemEnvironmentProvider = systemEnvironmentProvider;
+		this.address = firstNonNull(systemEnvironmentProvider.get("DB_PORT_27017_TCP_ADDR"), "127.0.0.1");
+	}
 
 	public static MongoConfiguration createConfiguration() {
 		return configuration;

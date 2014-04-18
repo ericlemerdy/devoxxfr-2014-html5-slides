@@ -1,18 +1,21 @@
 package net.mepc.resources;
 
 import static com.google.common.collect.Lists.newArrayList;
+import static com.mongodb.WriteConcern.JOURNALED;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import javax.ws.rs.core.Response;
 
+import com.mongodb.WriteConcern;
 import org.bson.types.ObjectId;
 import org.jongo.Find;
 import org.jongo.MongoCollection;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import com.mongodb.WriteResult;
@@ -81,17 +84,15 @@ public class TodoResourceTest {
 
 	@Test
 	public void when_posting_todo_should_add_todo_in_db() {
-		Todo todo = new Todo();
+		Todo spyedTodo = Mockito.spy(new Todo());
 		when(mongoServer.getCollection("todo")).thenReturn(collection);
-		when(collection.insert(todo)).thenReturn(writeResult);
-		ObjectId fakeId = new ObjectId();
-		when(writeResult.getUpsertedId()).thenReturn(fakeId);
+		when(collection.withWriteConcern(JOURNALED)).thenReturn(collection);
+		when(spyedTodo.get_id()).thenReturn(null, "42");
 		TodoResource resource = new TodoResource(mongoServer);
 
-		Response response = resource.update(todo);
+		Response response = resource.update(spyedTodo);
 
-		assertThat(response.getStatus()).isEqualTo(204);
-		verify(collection).save(todo);
-		assertThat(response.getEntity()).isNull();
+		assertThat(response.getStatus()).isEqualTo(200);
+		assertThat(response.getEntity()).isEqualTo("42");
 	}
 }

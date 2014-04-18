@@ -2,6 +2,10 @@ package net.mepc.model;
 
 import org.jongo.marshall.jackson.oid.ObjectId;
 
+import java.util.Objects;
+
+import static com.google.common.base.Objects.*;
+
 public class Todo {
 	private String title;
 	private boolean completed;
@@ -30,5 +34,10 @@ public class Todo {
 
 	public void setCompleted(boolean completed) {
 		this.completed = completed;
+	}
+
+	@Override
+	public String toString() {
+		return toStringHelper(this).add("title", title).add("completed", completed).add("_id", _id).toString();
 	}
 }

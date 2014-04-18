@@ -14,6 +14,8 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.ResponseBuilder;
 
 import com.mongodb.MongoException;
+import com.mongodb.WriteConcern;
+import com.mongodb.WriteResult;
 import org.bson.types.ObjectId;
 import org.jongo.MongoCollection;
 
@@ -61,7 +63,11 @@ public class TodoResource extends AbstractResource {
 	@PUT
 	@Consumes(APPLICATION_JSON)
 	public Response update(Todo todo) {
-		mongoCollection.save(todo);
-		return noContent().build();
+		System.out.println(todo);
+		if (todo.get_id() != null && todo.get_id().length() == 0) {
+			todo.set_id(null);
+		}
+		mongoCollection.withWriteConcern(WriteConcern.JOURNALED).save(todo);
+		return ok(todo.get_id()).build();
 	}
 }
