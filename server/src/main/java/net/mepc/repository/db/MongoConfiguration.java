@@ -21,7 +21,7 @@ public class MongoConfiguration {
 	@Inject
 	protected MongoConfiguration(SystemEnvironmentProvider systemEnvironmentProvider) {
 		this.systemEnvironmentProvider = systemEnvironmentProvider;
-		this.address = firstNonNull(systemEnvironmentProvider.get("DB_PORT_27017_TCP_ADDR"), "127.0.0.1");
+		this.address = firstNonNull(systemEnvironmentProvider.get("DB_PORT_27017_TCP_ADDR"), "172.17.0.4");
 	}
 
 	public static MongoConfiguration createConfiguration() {
