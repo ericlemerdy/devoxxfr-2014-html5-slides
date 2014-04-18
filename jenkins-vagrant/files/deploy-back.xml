@@ -34,11 +34,14 @@ IS_BLUE=$?
 
 if [ &quot;_${DEPLOYED}&quot; = &quot;_1&quot; ]; then
   TARGET_ENV=blue
+  TARGET_PORT=8081
 else
   if [ &quot;_${IS_BLUE}&quot; = &quot;_1&quot; ]; then
     TARGET_ENV=blue
+    TARGET_PORT=8081
   else
     TARGET_ENV=green
+    TARGET_PORT=8082
   fi
 fi
 
@@ -47,7 +50,7 @@ curl --data-binary @mepc_app-${RELEASE_VERSION}.tar -H &apos;Transfer-encoding: 
 curl -X DELETE &quot;http://10.0.2.2:4243/containers/app-${TARGET_ENV}?force=1&quot;
 curl --data-binary &quot;{\&quot;Image\&quot;:\&quot;mepc/app:${RELEASE_VERSION}\&quot;,\&quot;ExposedPorts\&quot;:{\&quot;8080/tcp\&quot;:{}}, \&quot;Cmd\&quot;: [\&quot;/usr/bin/java\&quot;, \&quot;-jar\&quot;, \&quot;/opt/mepc-server.jar\&quot;]}&quot; -H &apos;Content-Type: application/json&apos; &quot;http://10.0.2.2:4243/containers/create?name=app-${TARGET_ENV}&quot;
 
-curl --data-binary &apos;{ &quot;Links&quot;: [ &quot;db:db&quot; ] }&apos; -H &apos;Content-Type: application/json&apos; &quot;http://10.0.2.2:4243/containers/app-${TARGET_ENV}/start&quot;
+curl --data-binary &quot;{ \&quot;Links\&quot;: [ \&quot;db:db\&quot; ], \&quot;PortBindings\&quot;: { \&quot;8080/tcp\&quot;: [{ \&quot;HostPort\&quot;: \&quot;${TARGET_PORT}\&quot; }] } }&quot; -H &apos;Content-Type: application/json&apos; &quot;http://10.0.2.2:4243/containers/app-${TARGET_ENV}/start&quot;
 
 echo ${TARGET_ENV} &gt; target-env</command>
     </hudson.tasks.Shell>
