@@ -10,7 +10,7 @@ public class MongoConfigurationTest {
 	public void with_no_address_and_no_port_should_return_default_uri() {
 		MongoConfiguration configuration = createConfiguration();
 
-		assertThat(configuration.getUri().getURI()).isEqualTo("mongodb://127.0.0.1:27017");
+		assertThat(configuration.getUri().getURI()).isEqualTo("mongodb://172.17.0.4:27017");
 	}
 
 
