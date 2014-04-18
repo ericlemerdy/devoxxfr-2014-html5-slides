@@ -9,8 +9,7 @@ module.exports = function(grunt) {
                     './': ["<%= packageName %>", 'deploy/deploy.sh']
                 },
                 options: {
-//                    host: '10.0.2.2',
-                    host: '127.0.0.1',
+                    host: '192.168.1.1',
                     port: 22000,
                     username: 'root',
                     password: 'mepcRul3Z',
@@ -23,8 +22,7 @@ module.exports = function(grunt) {
             deploy: {
                 command: "chmod +x /var/www/deploy/deploy.sh && /var/www/deploy/deploy.sh <%= packageName %>",
                 options: {
-//                    host: '10.0.2.2',
-                    host: '127.0.0.1',
+                    host: '192.168.1.1',
                     port: 22000,
                     username: 'root',
                     password: 'mepcRul3Z'
