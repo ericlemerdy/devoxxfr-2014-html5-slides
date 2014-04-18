@@ -13,7 +13,7 @@
 			scope = $rootScope.$new();
 			httpBackend = $httpBackend;
 			httpBackend.when("GET", "package.json").respond({"version": "42"});
-            httpBackend.when("PUT", "http://mepc.io:8080/").respond(204, null);
+            httpBackend.when("PUT", "http://192.168.1.1:8080/").respond(204, null);
             ctrl = $controller('TodoCtrl', { $scope: scope, $http: $http});
 		}));
 
@@ -23,12 +23,12 @@
 		});
 
 		it('should not have any Todos on start', function () {
-            httpBackend.when("GET", "http://mepc.io:8080/").respond(204, null);
+            httpBackend.when("GET", "http://192.168.1.1:8080/").respond(204, null);
 			expect(scope.todos.length).toBe(0);
 		});
 
 		it('should have all Todos completed', function () {
-            httpBackend.when("GET", "http://mepc.io:8080/").respond(204, null);
+            httpBackend.when("GET", "http://192.168.1.1:8080/").respond(204, null);
 			scope.$digest();
 			expect(scope.allChecked).toBeTruthy();
 		});
@@ -74,7 +74,7 @@
 			var ctrl;
 
             beforeEach(inject(function ($controller) {
-                httpBackend.when('GET', 'http://mepc.io:8080/').respond([]);
+                httpBackend.when('GET', 'http://192.168.1.1:8080/').respond([]);
 				ctrl = $controller('TodoCtrl', {
 					$scope: scope
 				});
@@ -126,7 +126,7 @@
 						'completed': true
 					}];
 
-                httpBackend.when("GET", "http://mepc.io:8080/").respond(todoList);
+                httpBackend.when("GET", "http://192.168.1.1:8080/").respond(todoList);
                 ctrl = $controller('TodoCtrl', {
 					$scope: scope
 				});

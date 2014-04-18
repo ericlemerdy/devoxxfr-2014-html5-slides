@@ -9,12 +9,11 @@ angular.module('todomvc')
 
 		return {
 			get: function () {
-				return $http.get('http://mepc.io:8080/');
+				return $http.get('http://192.168.1.1:8080/');
 			},
 
 			put: function (todo) {
-				console.log(todo);
-				return $http.put('http://mepc.io:8080/', todo).success(function(data) {
+				return $http.put('http://192.168.1.1:8080/', todo).success(function(data) {
 					todo._id = data;
 				});
 			}
