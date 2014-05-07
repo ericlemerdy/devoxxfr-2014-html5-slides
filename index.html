@@ -247,15 +247,20 @@
                 <img src="pictures/ENIAC.jpg" style="height: 200px">
                 <small><a href="http://bit.ly/1iAoExs">réf. photo</a></small>
             </div>
-            <ul style="margin-top: 175px">
+            <ul style="margin-top: 117px">
                 <li>
-                    load balancer : <br/>
-                    <code>docker run -d -p 6379:6379 -p 8080:80 --name rp hipache</code><br/>
-                    <code>redis-cli -h 10.0.2.2 rpush frontend:mepc.io app</code>
-                </li>
-                <li>
-                    mongodb :<br/>
-                    <code>docker run -d --expose 27017 --name db mepc/db</code>
+                    <em>run_back.sh :</em><br/>
+                    <ul>
+                        <li>
+                            load balancer : <br/>
+                            <code>docker run -d -p 6379:6379 -p 8080:80 --name rp hipache</code><br/>
+                            <code>redis-cli -h 10.0.2.2 rpush frontend:mepc.io app</code>
+                        </li>
+                        <li>
+                            mongodb :<br/>
+                            <code>docker run -d --expose 27017 --name db mepc/db</code>
+                        </li>
+                    </ul>
                 </li>
                 <li>
                     appli : <br/>
