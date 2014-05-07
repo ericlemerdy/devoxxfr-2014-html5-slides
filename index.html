@@ -314,7 +314,8 @@
         <div>
             <h2>Un livrable validé part en prod</h2>
             <h3>Bascule sur le nouveau backend</h3>
-            <code></code>
+            <code>redis-cli -h 10.0.2.2 linsert frontend:appserver AFTER app http://`curl http://10.0.2.2:4243/containers/test_foo/json |sed 's/.*IPAddress":"\([0-9\.]*\).*/\1/'`:8080</code><br/>
+            <code>redis-cli -h 10.0.2.2 ltrim frontend:appserver 0 1</code>
         </div>
     </section>
     <section class="slide">
