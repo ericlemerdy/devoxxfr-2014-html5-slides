@@ -243,7 +243,6 @@
     </section>
     <section class="slide">
         <div>
-            <!--<h2>Déployons un backend !</h2>-->
             <div style="float: right">
                 <img src="pictures/ENIAC.jpg" style="height: 200px">
                 <small><a href="http://bit.ly/1iAoExs">réf. photo</a></small>
@@ -302,10 +301,10 @@
             <code style="font-size: xx-small">
                     curl --data-binary '{"Image":"mepc/app:1.0","ExposedPorts":{"8080/tcp":{}}, "Cmd": ["/usr/bin/java", "-jar", "/opt/mepc-server.jar"]}' -H 'Content-Type: application/json' \
             </code><br/>
-            <code style="font-size: xx-small;margin-top: -1em;display: block;width: 30em;">
+            <code style="font-size: xx-small;margin-top: -1em; display: block; width: 30em;">
                     'http://10.0.2.2:4243/containers/create?name=app-blue'
             </code><br/>
-            <code style="font-size: xx-small;display: block;margin-top: -2em;">
+            <code style="font-size: xx-small;margin-top: -2em; display: block;">
                 curl --data-binary '{ "Links": [ "db:db" ] }' -H 'Content-Type: application/json' 'http://10.0.2.2:4243/containers/app-blue/start'
             </code>
         </div>
